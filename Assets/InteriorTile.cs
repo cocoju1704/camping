@@ -5,9 +5,9 @@ using UnityEngine;
 public class InteriorTile : MonoBehaviour
 {
     public bool isOccupied;
-    public int furnitureType;
+    public int furnitureId;
     public void Init() {
         isOccupied = false;
-        furnitureType = -1;
+        furnitureId = -1;
     }
 }

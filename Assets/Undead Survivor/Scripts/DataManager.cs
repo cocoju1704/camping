@@ -14,6 +14,11 @@ public class DataManager : Singleton<DataManager>
         base.Awake();
         inventorySystem = GetComponent<InventorySystem>();
     }
+    // 가구 데이터
+    public FurnitureData[] furnitureData;
+    public GameObject furniturePrefab;  
+    // 재료 데이터
+    public MaterialData[] materialDatas;
 }
 [Serializable]
 public class VehicleData {

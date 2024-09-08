@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87903ed9a9dbcca4a8da3b65bf0612d1, type: 3}
   m_Name: Material 1
   m_EditorClassIdentifier: 
-  materialId: 0
-  materialName: Wood
-  materialDesc: 
-  materialIcon: {fileID: 21300000, guid: f8a9cfc721a20ce409c3d743e9b251bc, type: 3}
-  MaterialTier: 0
+  id: 1
+  name: fabric
+  desc: 
+  icon: {fileID: 21300000, guid: e577f30c6bd976a429addedf4c4ad662, type: 3}
+  tier: 0

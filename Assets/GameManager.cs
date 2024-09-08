@@ -13,7 +13,6 @@ public class GameManager : Singleton<GameManager> {
 
     public Player player;
     public PoolManager poolManager;
-    public MaterialData[] materialDatas;
     public GameObject playerPrefab;
     public GameObject poolManagerPrefab;
     public float gameTime;

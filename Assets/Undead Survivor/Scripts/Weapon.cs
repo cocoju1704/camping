@@ -42,11 +42,11 @@ public class Weapon : MonoBehaviour
 
     public void Init(ItemData data) {
         // Basic Set
-        name = "Weapon" + data.itemId;
+        name = "Weapon" + data.id;
         transform.parent = player.transform;
         transform.localPosition = Vector3.zero;
         // Property Set
-        id = data.itemId;
+        id = data.id;
         damage = data.baseDmg;
         count = data.baseCount;
         for (int i = 0; i  < GameManager.instance.poolManager.prefabs.Length; i++) {

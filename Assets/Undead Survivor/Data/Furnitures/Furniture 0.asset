@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8759c455d4aa54288a52f2d1c5f6c9, type: 3}
+  m_Name: Furniture 0
+  m_EditorClassIdentifier: 
+  id: 0
+  name: Crafting Table
+  desc: "\uADFC\uC811 \uBB34\uAE30, \uBC29\uC5B4\uAD6C \uC81C\uC791"
+  icon: {fileID: 21300000, guid: ac981ed34f6c3e845b69dba0871e0b58, type: 3}
+  furnitureType: 0
+  level: 1
+  maxLevel: 3
+  baseNum: 0
+  levelIngredients:
+  - multiplier: 0
+    materials:
+    - {x: 0, y: 1}
+    - {x: 1, y: 2}
+  - multiplier: 0
+    materials:
+    - {x: 2, y: 3}
+    - {x: 3, y: 4}
+  - multiplier: 0
+    materials:
+    - {x: 0, y: 0}
+    - {x: 0, y: 0}
+  isPlaced: 0
+  pos: {x: 0, y: 0}
+  size: {x: 2, y: 2}

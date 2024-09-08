@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Part 2
   m_EditorClassIdentifier: 
   partId: 0
-  partDesc: "\uCC28\uB7C9 \uB3C4\uCC29 \uC2DC\uAC04 \uAC10\uC18C"
-  partIcon: {fileID: 21300000, guid: 0d1488facc3f6214bb5037bdca26150b, type: 3}
-  partType: 1
+  partDesc: "\uCC28\uB7C9 \uD0D1\uC2B9 \uC2DC\uAC04 \uAC10\uC18C"
+  partIcon: {fileID: 21300000, guid: 2d772019975b2e74693f1613ecd3310f, type: 3}
+  partType: 2
   level: 0
   maxLevel: 0
   baseNum: 20

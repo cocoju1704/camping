@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d340cab460e455409014826c3bbe91c, type: 3}
   m_Name: Item 0
   m_EditorClassIdentifier: 
-  itemId: 0
-  itemName: "\uC0BD"
-  itemDesc: 
-  itemIcon: {fileID: -181907988, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
+  id: 0
+  name: 
+  desc: 
+  icon: {fileID: -181907988, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
   itemType: 0
   baseDmg: 4.5
   baseCount: 3
