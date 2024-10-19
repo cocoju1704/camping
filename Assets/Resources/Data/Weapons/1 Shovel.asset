@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e21485106f593469fcc2ede5678ecd, type: 3}
+  m_Name: 1 Shovel
+  m_EditorClassIdentifier: 
+  id: 1
+  itemName: Shovel
+  desc: basic melee weapon
+  icon: {fileID: 143021600, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+  levelIngredients:
+  - materials:
+    - {x: 0, y: 1}
+    - {x: 1, y: 1}
+  - materials:
+    - {x: 0, y: 2}
+    - {x: 1, y: 2}
+  - materials:
+    - {x: 0, y: 2}
+    - {x: 3, y: 3}
+  - materials:
+    - {x: 0, y: 0}
+    - {x: 2, y: 2}
+  - materials:
+    - {x: 1, y: 1}
+    - {x: 2, y: 2}
+  price: 0
+  type: 0
+  damage:
+  - 30
+  - 40
+  - 50
+  - 60
+  - 70
+  rate:
+  - 0.3
+  - 0.6
+  - 0.5
+  - 0.4
+  - 0.3
+  pierce: 0000000000000000000000000000000000000000
+  spread:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  knockback:
+  - 5
+  - 5
+  - 5
+  - 5
+  - 5
+  magazine: 0000000000000000000000000000000000000000
+  reload: 0
+  projectile: {fileID: 5056093838048571530, guid: 4b48bd25947bb1048ae83e437651c79c, type: 3}
+  speed: 0

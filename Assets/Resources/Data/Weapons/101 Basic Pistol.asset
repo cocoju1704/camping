@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e21485106f593469fcc2ede5678ecd, type: 3}
+  m_Name: 101 Basic Pistol
+  m_EditorClassIdentifier: 
+  id: 101
+  itemName: Pistol
+  desc: Basic
+  icon: {fileID: -353751291, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+  levelIngredients:
+  - materials:
+    - {x: 0, y: 4}
+    - {x: 0, y: 1}
+  - materials:
+    - {x: 0, y: 1}
+    - {x: 0, y: 1}
+  - materials:
+    - {x: 0, y: 0}
+    - {x: 0, y: 0}
+  - materials:
+    - {x: 0, y: 0}
+    - {x: 0, y: 0}
+  - materials:
+    - {x: 0, y: 0}
+    - {x: 0, y: 0}
+  price: 10
+  type: 1
+  damage:
+  - 100
+  - 20
+  - 30
+  - 40
+  - 50
+  rate:
+  - 1
+  - 0.9
+  - 0.8
+  - 0.7
+  - 0.6
+  pierce: 0100000002000000030000000400000005000000
+  spread:
+  - 30
+  - 25
+  - 20
+  - 15
+  - 10
+  knockback:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  magazine: 0a0000000a0000000a0000000a0000000a000000
+  reload: 1
+  projectile: {fileID: 2235698528570834797, guid: d41a2c14554eb8d499124cf96d0782ff, type: 3}
+  speed: 15

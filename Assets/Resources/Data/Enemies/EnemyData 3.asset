@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecac8e8b25e1d6343971039effca4130, type: 3}
+  m_Name: EnemyData 3
+  m_EditorClassIdentifier: 
+  id: 3
+  name: 
+  spawnTime: 1
+  isBoss: 0
+  health: 25
+  damage: 5
+  speed: 3
+  exp: 4
+  materialType: 3
+  dropRate: 30
+  spriteType: 3
+  enemyActionData:
+  - {fileID: 11400000, guid: 907b8a915b1adb34f893146fe7640b0b, type: 2}
+  - {fileID: 11400000, guid: f30ceb8881bece746a53ca5b28186261, type: 2}

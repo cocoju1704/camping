@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3995999439447829797
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8158767136812146419}
+  - component: {fileID: 8076635097846900854}
+  - component: {fileID: 5848956291895569634}
+  - component: {fileID: -778997616506209254}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8158767136812146419
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3995999439447829797}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8076635097846900854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3995999439447829797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 629b1c709f89ec04b8323c77b8f5252c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  poolManager: {fileID: 0}
+  playerPrefab: {fileID: 2283390520891427384, guid: 11b675632c20ffa4490ce5659d534a48, type: 3}
+  poolManagerPrefab: {fileID: 2402958709451229470, guid: cd6cff0d99946a645acf9ea84890a848, type: 3}
+  inventory: {fileID: 0}
+  storage: {fileID: 0}
+  vCam: {fileID: 0}
+  tempTime: 0
+  gameTime: 0
+  maxGameTime: 20
+  timerActive: 0
+  exp: 0
+  ArrivalTime: 20
+  stageExp: 10
+  kills: 0
+  onStageStart:
+    m_PersistentCalls:
+      m_Calls: []
+  onExpFull:
+    m_PersistentCalls:
+      m_Calls: []
+  onStageWrapUp:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &5848956291895569634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3995999439447829797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d4d6623f9250fc4f93790cb2e590438, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxInventory: 8
+  onInventoryChange:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-778997616506209254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3995999439447829797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19364f15aa1461f41a15df5ba5c259ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

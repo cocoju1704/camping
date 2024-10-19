@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8759c455d4aa54288a52f2d1c5f6c9, type: 3}
+  m_Name: 0 Crafting Table
+  m_EditorClassIdentifier: 
+  id: 0
+  itemName: "\uC7AC\uB8CC \uC81C\uC791 \uD14C\uC774\uBE14"
+  desc: "\uD558\uC704 \uC7AC\uB8CC\uB97C \uC870\uD569\uD574 \uC0C1\uC704 \uC7AC\uB8CC\uB97C
+    \uC81C\uC791\uD560 \uC218 \uC788\uB294 \uAC00\uAD6C"
+  icon: {fileID: 21300000, guid: ac981ed34f6c3e845b69dba0871e0b58, type: 3}
+  levelIngredients:
+  - materials:
+    - {x: 0, y: 4}
+    - {x: 1, y: 4}
+    - {x: 2, y: 4}
+  - materials:
+    - {x: 100, y: 2}
+    - {x: 101, y: 2}
+    - {x: 102, y: 2}
+  - materials:
+    - {x: 200, y: 2}
+    - {x: 201, y: 2}
+  - materials:
+    - {x: 103, y: 2}
+    - {x: 104, y: 2}
+  - materials:
+    - {x: 103, y: 2}
+    - {x: 104, y: 2}
+  furnitureType: 0
+  levelNums:
+  - 199
+  - 299
+  - 399
+  - 499
+  effectDesc: "\uC81C\uC791 \uAC00\uB2A5 \uC7AC\uB8CC \uC99D\uAC00"
+  size: {x: 2, y: 2}

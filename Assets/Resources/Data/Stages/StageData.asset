@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91af6a73939dda6459c9a08b909b4a13, type: 3}
+  m_Name: StageData
+  m_EditorClassIdentifier: 
+  stageExp: 10
+  earlySpawnTime: 5
+  lateSpawnTime: 1
+  enemyDataList:
+  - {fileID: 11400000, guid: 957d55cec2582fb4cabbd54667711c2f, type: 2}
+  - {fileID: 11400000, guid: 742b4301f954b474b91db97ccc0adb9c, type: 2}
+  - {fileID: 11400000, guid: 2687e430cbd5db8478b3b3f626c30ccf, type: 2}
+  - {fileID: 11400000, guid: a8c0cd05cc782364da5d564def28128e, type: 2}
+  - {fileID: 11400000, guid: d09caf635775a5b4fa0df0fa279ff5ef, type: 2}
+  bossDataList:
+  - {fileID: 11400000, guid: c267dc5f26631a44a88ee271634334a9, type: 2}
+  lootDataList:
+  - {fileID: 11400000, guid: d87bee17f7e7c6f459d8b621057ded7f, type: 2}
+  - {fileID: 11400000, guid: 42ca6c442d9cf944883cd98c4948e548, type: 2}

@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e21485106f593469fcc2ede5678ecd, type: 3}
+  m_Name: 201 Basic Rifle
+  m_EditorClassIdentifier: 
+  id: 201
+  itemName: Rifle
+  desc: 
+  icon: {fileID: -144335857, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+  levelIngredients:
+  - materials:
+    - {x: 0, y: 0}
+    - {x: 0, y: 0}
+  - materials:
+    - {x: 0, y: 0}
+    - {x: 0, y: 0}
+  - materials:
+    - {x: 0, y: 0}
+    - {x: 0, y: 0}
+  - materials:
+    - {x: 0, y: 0}
+    - {x: 0, y: 0}
+  - materials:
+    - {x: 0, y: 0}
+    - {x: 0, y: 0}
+  price: 0
+  type: 2
+  damage:
+  - 10
+  - 15
+  - 20
+  - 25
+  - 30
+  rate:
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  pierce: 0000000000000000000000000000000000000000
+  spread:
+  - 10
+  - 8
+  - 6
+  - 4
+  - 2
+  knockback:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  magazine: 1e0000001e0000001e0000001e0000001e000000
+  reload: 2
+  projectile: {fileID: 2235698528570834797, guid: 388ee7d5289ee0e429b6673ce574f74d, type: 3}
+  speed: 15

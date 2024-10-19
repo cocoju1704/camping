@@ -9,6 +9,13 @@ TagManager:
   - Enemy
   - Bullet
   - Material
+  - VanEntrance
+  - CampEntrance
+  - Workbench
+  - NextStage
+  - Loot
+  - EnemyBullet
+  - Block
   layers:
   - Default
   - TransparentFX
@@ -17,7 +24,7 @@ TagManager:
   - Water
   - UI
   - Enemy
-  - 
+  - Obstacle
   - 
   - 
   - 

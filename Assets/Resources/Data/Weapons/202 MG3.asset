@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e21485106f593469fcc2ede5678ecd, type: 3}
+  m_Name: 202 MG3
+  m_EditorClassIdentifier: 
+  id: 202
+  itemName: MG3
+  desc: 
+  icon: {fileID: 21300000, guid: 5f950233183ef834dbb313284f4618e3, type: 3}
+  levelIngredients:
+  - materials:
+    - {x: 0, y: 0}
+    - {x: 0, y: 0}
+  - materials:
+    - {x: 0, y: 0}
+    - {x: 0, y: 0}
+  - materials:
+    - {x: 0, y: 0}
+    - {x: 0, y: 0}
+  - materials:
+    - {x: 0, y: 0}
+    - {x: 0, y: 0}
+  - materials:
+    - {x: 0, y: 0}
+    - {x: 0, y: 0}
+  price: 0
+  type: 2
+  damage:
+  - 10
+  - 15
+  - 20
+  - 25
+  - 30
+  rate:
+  - 0.05
+  - 0.05
+  - 0.05
+  - 0.05
+  - 0.05
+  pierce: 0000000000000000000000000000000000000000
+  spread:
+  - 10
+  - 8
+  - 6
+  - 4
+  - 2
+  knockback:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  magazine: 64000000780000008c000000a0000000c8000000
+  reload: 5
+  projectile: {fileID: 2235698528570834797, guid: 388ee7d5289ee0e429b6673ce574f74d, type: 3}
+  speed: 20
