@@ -1,3 +1,5 @@
+# 차박(Carsleeping) (C#, Unity)
+
 ---
 
 **1인 개발 뱀서라이크 + 로그라이트 2D 런앤건 게임입니다.**
@@ -8,17 +10,17 @@
 
 ### 영상
 
-https://www.youtube.com/watch?v=yt2F3-Hdb5w
+[https://www.youtube.com/watch?v=yt2F3-Hdb5w](https://www.youtube.com/watch?v=yt2F3-Hdb5w)
 
 ### 코드
 
-https://github.com/cocoju1704/camping
+[https://github.com/cocoju1704/camping](https://github.com/cocoju1704/camping)
 
 # 게임 소개
 
 ---
 
-![Unity2D_C____Going_Camping (1).gif](attachment:b8be5f76-6f05-4145-bd5b-751a8e71538f:Unity2D_C____Going_Camping_(1).gif)
+![Unity2D_C____Going_Camping (1).gif](Unity2D_C____Going_Camping_(1).gif)
 
 **좀비 아포칼립스 세상에서 캠핑카를 타고다니며 점점 더 어려워지는 스테이지를 살아남자!**
 
@@ -34,31 +36,35 @@ https://github.com/cocoju1704/camping
 
 ---
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/6d55dc2e-026e-4783-8af5-a8aa83cf99cd/bab8cf39-dcd8-4cbb-8e7d-39d4c73d6c88/image.png)
+![image.png](image.png)
 
 ## 전투 씬
 
-![경험치획득 (1).gif](attachment:6e787079-092d-4fc4-9c50-ee39cfc0d8bd:경험치획득_(1).gif)
 
-![차량 호출 (1).gif](attachment:8ecd4b07-7eea-48a2-93fc-b5819285ccd5:차량_호출_(1).gif)
 
-![차량 탑승 (1).gif](attachment:9c280d50-8d79-44af-bda8-882fb5aae832:차량_탑승_(1).gif)
 
-![스테이지완료 (1).gif](attachment:20797a15-ada5-4f89-8c64-3728d6493861:스테이지완료_(1).gif)
+
+
+
+
 
 ### **경험치 획득 단계**
+![경험치획득 (1).gif](%EA%B2%BD%ED%97%98%EC%B9%98%ED%9A%8D%EB%93%9D_(1).gif)
 
 적 처치 시 경험치를 획득합니다
 
 ### 차량 호출 단계
+![차량 호출 (1).gif](%EC%B0%A8%EB%9F%89_%ED%98%B8%EC%B6%9C_(1).gif)
 
 플레이어는 몬스터를 처치해 일정 이상의 경험치를 획득하면 차량을 호출할 수 있게 됩니다.
+![차량 탑승 (1).gif](%EC%B0%A8%EB%9F%89_%ED%83%91%EC%8A%B9_(1).gif)
 
 차량이 도착하면 플레이어는 차량 주변을 벗어나지 못하게 되며, 차량을 일정 시간동안 좀비들의 공격에서 지켜야 합니다.
 
 차량 호출 후 도착까지 일정 시간 적의 공격을 버텨내야 합니다.
 
 ### **차량 탑승 단계**
+![스테이지완료 (1).gif](%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%A7%80%EC%99%84%EB%A3%8C_(1).gif)
 
 주어진 시간동안 차량을 지키는 데 성공하면, 스테이지가 클리어됩니다.
 
@@ -69,33 +75,37 @@ https://github.com/cocoju1704/camping
 
 ### 캠핑카 내부
 
-![가구 배치 (1).gif](attachment:4ee00bf9-5f59-4f1b-8f73-5dee8359065a:가구_배치_(1).gif)
-
-![가구 선택 (1).gif](attachment:f2d93c18-f5f9-454d-9a96-1ab730338419:가구_선택_(1).gif)
-
-![image.png](attachment:effc6cdd-9e8d-4e51-9b0d-43a4fd63362d:image.png)
-
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/6d55dc2e-026e-4783-8af5-a8aa83cf99cd/89bcd42c-b64e-402b-8cf4-4b8f6e85a3d5/image.png)
-
-![image.png](attachment:3b342054-2d9c-491c-8bad-335c2b7a7175:image.png)
+![가구 배치 (1).gif](%EA%B0%80%EA%B5%AC_%EB%B0%B0%EC%B9%98_(1).gif)
 
 플레이어는 캠핑카 내부 원하는 위치에 가구를 설치할 수 있습니다.
+
+![가구 선택 (1).gif](%EA%B0%80%EA%B5%AC_%EC%84%A0%ED%83%9D_(1).gif)
 
 가구는 종류에 따라 다양한 기능을 제공합니다.
 
 미리보기를 통해 설치 가능 여부를 확인할 수 있습니다.
 
+![image.png](image%201.png)
+
 제작 테이블을 통해 상위 재료를 조합할 수 있습니다.
 
+![image.png](image%202.png)
+
 총기 제작 테이블을 통해 총기를 강화할 수 있습니다.
+![image.png](image%203.png)
 
 기타 가구들을 통해 플레이어 스펙을 강화할 수 있습니다.
+
+
+
+
+
 
 ### 캠핑카 외부
 
 - 업그레이드를 통해 캠핑카의 스펙을 강화할 수 있습니다.
 
-![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/6d55dc2e-026e-4783-8af5-a8aa83cf99cd/c03dcacf-1dc8-4837-9bd7-ff7d5922f0b5/image.png)
+![image.png](image%204.png)
 
 - 캠핑카: 스테이지에 등장하는 캠핑카의 기능 및 스펙을 강화합니다.
 - 텐트: 게임을 저장합니다.
@@ -116,7 +126,7 @@ https://github.com/cocoju1704/camping
 
 **전략 패턴**
 
-![image.png](attachment:d33537ec-938a-440a-9b1f-01f2887d77be:image.png)
+![image.png](image%205.png)
 
 - Reposition.cs: 무한맵을 위한 재배치 로직을 담당
 - 해당 컴포넌트를 가지고 있는 오브젝트의 태그에 따라 다른 동작을 수행
@@ -176,7 +186,7 @@ https://github.com/cocoju1704/camping
 - 투사체에 회전, 추적, 폭발 등 다양한 속성을 모듈화하여 각 속성의 독립성, 유연성 보장
 - 기본 클래스(Bullet.cs) + 여러 개의 데코레이터(BulletAddon.cs)
 
-![image.png](attachment:fcf1025a-e64c-4e5e-8436-a6d6badbe86c:image.png)
+![image.png](image%206.png)
 
 ## 적 오브젝트 구현
 
@@ -184,7 +194,7 @@ https://github.com/cocoju1704/camping
 
 - 다양한 행동패턴과 스킬을 가진 적을 다양하게 구현해야 하기 때문에 편집의 용이를 위해 ScriptableObject를 사용하였다.
 
-![image.png](attachment:9dfe1037-4fe9-4bfd-8575-606515b57d3d:image.png)
+![image.png](image%207.png)
 
 ## 옵저버 패턴
 
@@ -194,7 +204,7 @@ https://github.com/cocoju1704/camping
 - 동작에 참여하는 오브젝트는 씬 내 다양하게 위치
 - 따라서, 발판이 **이벤트만 발생**시키고, 각 발판에 따른 구체적인 동작은 이들을 구독중인 매니저(ExteriorManager.cs)**에서 일괄적으로 처리
 
-![image.png](attachment:81677f58-7b08-489c-88b9-91d7e27424b1:image.png)
+![image.png](image%208.png)
 
 ## 데이터 관리
 
