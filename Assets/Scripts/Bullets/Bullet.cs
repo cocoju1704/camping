@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviour // 투사체 기본 컴포넌트
 {
     public enum BulletType {
         Player,
@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     }
     public BulletType bulletType;
     public float damage; // 대미지
-    public int pierce; // 관통
+    public int pierceCount; // 관통
     public bool isMelee;
     public float knockback;
     public float speed;
@@ -29,34 +29,29 @@ public class Bullet : MonoBehaviour
             rigid.velocity = dir * speed;
         }
     }
+    // 투사체 데이터 설정
     public void SetSpec(float damage, int pierce, float knockback) {
         this.damage = damage;
-        this.pierce = pierce;
+        this.pierceCount = pierce;
         this.knockback = knockback;
     }
     protected void OnTriggerEnter2D(Collider2D collision)
     {
         if (isMelee) return;
-        if (pierce < 0) return;
+        if (pierceCount < 0) return;
         switch (bulletType) {
             case BulletType.Player:
                 // 태그가 enemy도 block도 아니면 리턴
                 if (!collision.CompareTag("Enemy") && !collision.CompareTag("Block")) return;
-
-                // Enemy와 충돌 시 피어스 감소
                 Enemy enemy = collision.GetComponent<Enemy>();
                 if (enemy != null && enemy.isLive) {
-                    pierce--;
+                    pierceCount--;
                 }
-
-                // Block과 충돌 시 피어스 감소
                 Block block = collision.GetComponent<Block>();
                 if (block != null) {
-                    pierce--;
+                    pierceCount--;
                 }
-
-                // pierce가 0 이하일 때 속도 중지 및 비활성화
-                if (pierce < 0) {
+                if (pierceCount < 0) {
                     rigid.velocity = Vector2.zero;
                     gameObject.SetActive(false);
                 }
@@ -77,11 +72,10 @@ public class Bullet : MonoBehaviour
                 }
                 break;
         }
-
     }
     void OnTriggerExit2D(Collider2D collision) {
         if (isMelee) return;
-        if (!collision.CompareTag("Area") || pierce < 0) return;
+        if (!collision.CompareTag("Area") || pierceCount < 0) return;
         gameObject.SetActive(false);
     }
 }

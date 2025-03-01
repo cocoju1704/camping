@@ -70,7 +70,7 @@ public class Player : Singleton<Player>, ISavable
             stamina = Mathf.Clamp(stamina, 0, maxStamina);
         }
 
-        // 이동 처리 (달리기 시 속도 증가)
+        // 속도 증가
         float currentSpeed = isSprinting ? speed * 1.5f : speed;
         Vector2 nextVec = inputVec.normalized * currentSpeed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + nextVec);
@@ -153,7 +153,7 @@ public class Player : Singleton<Player>, ISavable
     public void Deactivate() {
         enabled = false;
         GetComponent<PlayerInput>().enabled = false;
-        GetComponent<WeaponSystem>().DisableHands();
+        GetComponent<WeaponSystem>().DisableWeapon();
         GetComponent<Rigidbody2D>().mass = 1000000;
         GetComponent<Collider2D>().enabled = false;
         GetComponent<Scanner>().enabled = false;
@@ -163,7 +163,7 @@ public class Player : Singleton<Player>, ISavable
         UICanvas.enabled = false;
     }
     public void DeactivateWeapon() {
-        GetComponent<WeaponSystem>().DisableHands();
+        GetComponent<WeaponSystem>().DisableWeapon();
     }
     public void Activate() {
         enabled = true;
@@ -179,7 +179,7 @@ public class Player : Singleton<Player>, ISavable
         health = maxHealth;
     }
     public void ActivateWeapon() {
-        GetComponent<WeaponSystem>().EnableHands();
+        GetComponent<WeaponSystem>().EnableWeapon();
     }
     // 저장/불러오기
     public void Save(GameData data) {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class StorageUI : MonoBehaviour
+public class StorageUI : MonoBehaviour // 캠핑카 인벤토리 UI 관련 클래스
 {
     public enum InfoType {
         inventory,
@@ -27,7 +27,7 @@ public class StorageUI : MonoBehaviour
         }
         
     }
-    void LateUpdate() {
+    void LateUpdate() { // 캠핑카 인벤토리에 있는 아이템을 슬롯에 표시
         foreach (InventorySlot slot in slots) {
             slot.Init();
         }

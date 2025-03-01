@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PartUpgradePopup : MonoBehaviour, IToggleable
-{
+{ // 캠핑카 부품 업그레이드 팝업. UpgradePopup 상속으로 통합 예정
     [Header("데이터")]
     public CarPartsData[] carPartsList;
     public int index;
@@ -34,10 +34,10 @@ public class PartUpgradePopup : MonoBehaviour, IToggleable
     public void UpdateUI() {
         partImage.sprite = carPartsList[index].icon;
         partName.text = carPartsList[index].itemName;
-        partDesc.text = CreateText();
+        partDesc.text = CreateDesc();
         ingredientPopup.Set(carPartsList[index].levelIngredients[0].materials);
     }
-    public string CreateText() {
+    public string CreateDesc() {
         string temp = carPartsList[index].desc;
         temp += "\n";
         temp += "Level " + GameManager.instance.vehicleLevels[index] + " / " + (carPartsList[index].levelNum.Length-1);
@@ -61,7 +61,7 @@ public class PartUpgradePopup : MonoBehaviour, IToggleable
             UpdateUI();
         }
     }
-    void Upgrade() {
+    void Upgrade() { // 캠핑카 부품 업그레이드 및 스펙 재적용
         int lv = GameManager.instance.vehicleLevels[index];
         if (lv == carPartsList[index].levelNum.Length - 1) {
             return;

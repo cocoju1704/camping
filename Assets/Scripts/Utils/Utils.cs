@@ -15,7 +15,7 @@ public static class Utils {
     public static Vector2Int WorldToGrid(Vector3 worldPos) {
         return new Vector2Int(Mathf.RoundToInt(worldPos.x + 5.5f), Mathf.RoundToInt(worldPos.y + 2f));
     }
-    public static Vector2 GetCenterPos(Vector2Int pos, Vector2Int size) {
+    public static Vector2 GetCenterPos(Vector2Int pos, Vector2Int size) { // 가구의 중심 좌표를 계산할 때 사용
         float offsetX = -5.5f + (size.x - 1) / 2f;
         float offsetY = -2f + (size.y - 1) / 2f;
         Vector2 realPos = new Vector2(pos.x + offsetX, pos.y + offsetY);

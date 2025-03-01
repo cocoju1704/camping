@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 // PressurePlate 클래스
-public class PressurePlate : MonoBehaviour
+public class PressurePlate : MonoBehaviour // 플레이어 접촉 시 트리거 발동 스크립트
 {
     private List<ITriggerObserver> observers = new List<ITriggerObserver>();
 

@@ -37,7 +37,7 @@ public class PoolManager : Singleton<PoolManager>
     public GameObject Get(int index) {
         GameObject select = null;
         // ... 선택한 풀의 놀고 있는(=비활성화 된) 게임 오브젝트 접근
-            // ... 발견 시 select 변수에 할당
+        // ... 발견 시 select 변수에 할당
         foreach (GameObject obj in pools[index]) {
             if (obj == null) {
                 Debug.LogError(obj);
@@ -48,8 +48,7 @@ public class PoolManager : Singleton<PoolManager>
                 break;
             }
         }
-        // ... 비활성화 오브젝트가 없을 시
-            // ... 새롭게 생성하고 select 변수에 할당
+        // ... 비활성화 오브젝트가 없을 시 새롭게 생성하고 select 변수에 할당
         if (!select) {
             select = Instantiate(prefabs[index], new Vector3(999, 999, 0), Quaternion.identity);
             // 부모 오브젝트를 PoolManager로 설정

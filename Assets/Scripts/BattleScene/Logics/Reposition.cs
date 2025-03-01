@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Reposition : MonoBehaviour
+public class Reposition : MonoBehaviour // 뱀서라이크의 무한맵 구현을 위한 재배치를 담당하는 함수
 {
     Collider2D collider;
     Vector3 startPos;
@@ -18,7 +18,7 @@ public class Reposition : MonoBehaviour
     }
     void Start() {
         if (transform.CompareTag("Ground")) {
-            precomputedPatterns = GetPrecomputedPatterns();
+            precomputedPatterns = GetPrecomputedPatterns(); // 블록 배치 패턴
             StartCoroutine(DelayedSetLandScape());
         }
     }
@@ -27,17 +27,19 @@ public class Reposition : MonoBehaviour
         if (!collision.CompareTag("Area")) {
             return;
         }
-
         Vector3 playerPos = GameManager.instance.player.transform.position;
         Vector3 myPos = transform.position;
-
-        if (transform.CompareTag("Ground")) {
+        if (transform.CompareTag("Bullet") || transform.CompareTag("Loot") || transform.CompareTag("EnemyBullet")) {
+            HandleBulletReposition();
+        } else if (transform.CompareTag("Ground")) {
             HandleGroundReposition(playerPos, myPos);
         } else if (transform.CompareTag("Enemy") && collider.enabled) {
             HandleEnemyReposition(playerPos, myPos);
         }
     }
-
+    void HandleBulletReposition() {
+        gameObject.SetActive(false);
+    }
     void HandleGroundReposition(Vector3 playerPos, Vector3 myPos) {
         float diffX = playerPos.x - myPos.x;
         float diffY = playerPos.y - myPos.y;
@@ -62,26 +64,18 @@ public class Reposition : MonoBehaviour
         transform.Translate(ran + dist * 2);
     }
 
-    // 패턴을 정의하는 함수
     private Vector2Int[] GetRandomPattern() {
         return precomputedPatterns[UnityEngine.Random.Range(0, precomputedPatterns.Count)];
     }
     private List<Vector2Int[]> GetPrecomputedPatterns() {
     List<Vector2Int[]> patterns = new List<Vector2Int[]>();
-
     patterns.Add(new Vector2Int[] {
         new Vector2Int(-4, -4), new Vector2Int(-3, -4), new Vector2Int(-2, -4), new Vector2Int(-1, -4), new Vector2Int(0, -4),
-        //... 나머지 패턴 정의
-    });
-    patterns.Add(new Vector2Int[] {
         new Vector2Int(-4, -4), new Vector2Int(-3, -4), new Vector2Int(-2, -4), new Vector2Int(-1, -4), new Vector2Int(0, -4),
         new Vector2Int(-4, -3), new Vector2Int(-3, -3), new Vector2Int(-2, -3), new Vector2Int(-1, -3), new Vector2Int(0, -3),
         new Vector2Int(-4, -2), new Vector2Int(-3, -2), new Vector2Int(-2, -2), new Vector2Int(-1, -2), new Vector2Int(0, -2),
         new Vector2Int(-4, -1), new Vector2Int(-3, -1), new Vector2Int(-2, -1), new Vector2Int(-1, -1), new Vector2Int(0, -1),
-        new Vector2Int(-4, 0), new Vector2Int(-3, 0), new Vector2Int(-2, 0), new Vector2Int(-1, 0), new Vector2Int(0, 0)
-    });
-
-    patterns.Add(new Vector2Int[] {
+        new Vector2Int(-4, 0), new Vector2Int(-3, 0), new Vector2Int(-2, 0), new Vector2Int(-1, 0), new Vector2Int(0, 0),
         new Vector2Int(-4, 0), new Vector2Int(-3, 0), new Vector2Int(-2, 0), new Vector2Int(-1, 0),
         new Vector2Int(-1, 1), new Vector2Int(-1, 2), new Vector2Int(-1, 3), new Vector2Int(-2, 3), new Vector2Int(-3, 3)
     });
@@ -92,7 +86,8 @@ public class Reposition : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         SetLandScape();
     }
-    public void SetLandScape() {
+    
+    public void SetLandScape() { // 타일맵에 블록 및 자원 배치
         ResetGrid();
         Vector3[] offsets = {
             transform.position + new Vector3(-16, -10, 0) + new Vector3(0.5f, 0.5f, 0),
@@ -125,7 +120,7 @@ public class Reposition : MonoBehaviour
         SetLoot();
     }
 
-    void SetLoot() {
+    void SetLoot() { // 랜덤하게 자원 배치
         Vector3 offset = transform.position + new Vector3(-16, -10, 0) + new Vector3(0.5f, 0.5f, 0);
 
         for (int i = 0; i < 5; i++) {
@@ -145,7 +140,7 @@ public class Reposition : MonoBehaviour
         }
     }
 
-    void ResetGrid() {
+    void ResetGrid() { // Reposition 시 타일맵 초기화
         for (int x = 0; x < 32; x++) {
             for (int y = 0; y < 20; y++) {
                 grid[x, y] = false;
@@ -156,11 +151,11 @@ public class Reposition : MonoBehaviour
 
         }
     }
-
+    // 타일맵 바깥 조건
     bool IsOutOfBounds(int x, int y) {
         return x < 0 || x >= 32 || y < 0 || y >= 20;
     }
-
+    // 탈출 페이즈로 전환 시 타일맵 초기화
     public void ResetGround() {
         HandleGroundReposition(startPos, transform.position);
     }

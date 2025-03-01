@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using UnityEngine;
 public static class MaterialRecipe {
+    // 재료 조합법
     public static Dictionary<int, List<Vector2Int>> recipe = new Dictionary<int, List<Vector2Int>> {
         { 100, new List<Vector2Int> { new Vector2Int(0, 3)}}, // Plank
         { 101, new List<Vector2Int> { new Vector2Int(2, 3)} }, // Rope

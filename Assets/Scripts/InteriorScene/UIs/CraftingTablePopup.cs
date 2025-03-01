@@ -5,7 +5,7 @@ using System.Collections;
 using System;
 using Unity.Collections;
 
-public class CraftingTablePopup : UpgradePopup {
+public class CraftingTablePopup : UpgradePopup { // 조합대 팝업창
     [Header("재료 오브젝트")]
     public Image materialImage;
     public Button create;
@@ -19,18 +19,16 @@ public class CraftingTablePopup : UpgradePopup {
         base.Start();
         StartCoroutine(WaitForPlayerAndInitialize());
     }
-    IEnumerator WaitForPlayerAndInitialize() {
-        // Player.instance가 준비될 때까지 대기
+    IEnumerator WaitForPlayerAndInitialize() {  // Player.instance가 준비될 때까지 대기
         while (Player.instance == null) {
             yield return null;  // 한 프레임 대기
         }
         Set();
         toLeft.onClick.AddListener(ToLeft);
         toRight.onClick.AddListener(ToRight);
-        create.onClick.AddListener(CreateMaterial);
+        create.onClick.AddListener(CraftMaterial);
     }
-    // 무기 초기화
-    private void Set() {
+    private void Set() {  // 레벨에 따라 재료 설정
         int key = MaterialRecipe.GetKeyByIndex(index);
         upgradeMaterials = MaterialRecipe.recipe[key];
         Debug.Log(upgradeMaterials.Count);
@@ -39,20 +37,17 @@ public class CraftingTablePopup : UpgradePopup {
         materialImage.sprite = DataManager.instance.materialDataDict[key].icon;
         materialIngredientPopup.Set(upgradeMaterials);
     }
-    // 다음 무기 선택
-    public void ToRight() {
+    public void ToRight() {  
         index = (index + 1) % maxIndex;
         int key = MaterialRecipe.GetKeyByIndex(index);
         Set();
     }
-
-    // 이전 무기 선택
     public void ToLeft() {
         index = (index - 1 + maxIndex) % maxIndex;
         Set();
     }
     // 재료 생성
-    public void CreateMaterial() {
+    public void CraftMaterial() {
         if (GameManager.instance.storage.UseMaterials(upgradeMaterials)) {
             GameManager.instance.storage.AddToStorage(index + 100, 1);
         }

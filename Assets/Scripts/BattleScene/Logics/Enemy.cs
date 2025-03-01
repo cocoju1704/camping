@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
-public class Enemy : Unit
+public class Enemy : Unit // 몬스터의 기본 정보
 {
     public float speed;
     public int exp;
@@ -14,7 +14,7 @@ public class Enemy : Unit
     public int dropRate;
 
     public EnemyData enemyData;
-    public RuntimeAnimatorController[] animControllers;
+    public RuntimeAnimatorController[] animControllers; // 몬스터의 애니메이션 컨트롤러
     Rigidbody2D target; // 몬스터가 향하는 대상
     public bool isLive = true; //몬스터 사망여부
     Animator anim;
@@ -30,10 +30,25 @@ public class Enemy : Unit
         waitForFixedUpdate = new WaitForFixedUpdate();
         coll = GetComponent<Collider2D>();
     }
-    void LateUpdate() {
+    void LateUpdate() { // 방향에 따라 스프라이트 뒤집기
         spriteRenderer.flipX = target.position.x < rigid.position.x;
     }
-    void OnEnable() {
+
+    public void Init(EnemyData data) { // 몬스터 프리팹이 어떤 종류의 몬스터일지 결정
+        enemyData = data;
+        anim.runtimeAnimatorController = animControllers[data.spriteType];
+        speed = data.speed;
+        maxHealth = data.health;
+        health = data.health;
+        exp = data.exp;
+        materialID = data.materialType;
+        dropRate = data.dropRate;
+        damage = data.damage;
+        GetComponent<EnemyPathfinding>().Init();
+        GetComponent<EnemyAction>().Init();
+
+    }
+    void OnEnable() { // 결정된 프리팹에 따라 몬스터 초기화
         target = GameManager.instance.player.GetComponent<Rigidbody2D>();
         isLive = true;
         health = maxHealth;
@@ -44,28 +59,14 @@ public class Enemy : Unit
         GetComponent<EnemyAction>().enabled = true;
         transform.localScale = new Vector3(1, 1, 1);
     }
-    public void Init(EnemyData data) {
-        enemyData = data;
-        anim.runtimeAnimatorController = animControllers[data.spriteType];
-        speed = data.speed;
-        maxHealth = data.health;
-        health = data.health;
-        exp = data.exp;
-        materialID = data.materialType;
-        dropRate = data.dropRate;
-        damage = data.damage;
-        GetComponent<EnemyMovement>().Init();
-        GetComponent<EnemyAction>().Init();
 
-    }
-
-    void OnTriggerEnter2D(Collider2D collision) {
+    void OnTriggerEnter2D(Collider2D collision) { // 플레이어 투사체와의 충돌 처리
         if (!collision.CompareTag("Bullet") || !isLive) return;
 
         Bullet bullet = collision.GetComponent<Bullet>();
         health -= bullet.damage;
         StartCoroutine(KnockBack(bullet.knockback));
-        StartCoroutine(ShowDamage(bullet.damage));
+        //StartCoroutine(ShowDamage(bullet.damage));
 
         if (health > 0) {
             anim.SetTrigger("Hit");
@@ -82,12 +83,12 @@ public class Enemy : Unit
         }
     }
 
-    void Dead() {
+    void Dead() { //몬스터 사망 처리(비활성화)
         rigid.simulated = false;
         gameObject.SetActive(false);
     }
 
-    IEnumerator KnockBack(float knockBackForce) {
+    IEnumerator KnockBack(float knockBackForce) { // 투사체 넉백 변수를 인자로 받아 그만큼 넉백
         yield return waitForFixedUpdate;
         rigid.velocity = Vector2.zero;
         Vector3 playerPos = GameManager.instance.player.transform.position;
@@ -95,7 +96,7 @@ public class Enemy : Unit
         rigid.AddForce(dirVec.normalized * knockBackForce, ForceMode2D.Impulse);
     }
 
-    IEnumerator DropLoot() {
+    IEnumerator DropLoot() { 
         bool isDrop = Random.Range(0, 100) < dropRate;
         if (!isDrop) yield break;
 
@@ -106,12 +107,5 @@ public class Enemy : Unit
         yield return material.transform.DOMove(destination, 1f).SetEase(Ease.OutQuad).WaitForCompletion();
         yield return new WaitForSeconds(1f);
         Dead();
-    }
-
-    IEnumerator ShowDamage(float bulletDamage) {
-        GameObject damageText = PoolManager.instance.Get("DamageText");
-        damageText.transform.position = transform.position;
-        damageText.GetComponent<TempText>().SetTempText(bulletDamage.ToString(), Color.white, 8);
-        yield return new WaitForFixedUpdate();
     }
 }

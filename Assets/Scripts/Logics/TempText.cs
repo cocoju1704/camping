@@ -5,7 +5,7 @@ using UnityEngine;
 using DG.Tweening;  // DOTween 사용
 
 public class TempText : MonoBehaviour
-{
+{ // 대미지 표기 등 UI에서 사용하는 일시적인 텍스트
     TMP_Text text;
     public float fadeDuration = 2f; // 페이드 아웃 지속 시간
     public Vector3 moveOffset = new Vector3(0, 1, 0); // 이동할 거리

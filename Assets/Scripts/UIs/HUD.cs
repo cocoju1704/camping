@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HUD : MonoBehaviour
+public class TextHUD : MonoBehaviour // HUD에 표시되는 텍스트
 {
     public enum InfoType
     {
@@ -37,22 +37,22 @@ public class HUD : MonoBehaviour
         time += Time.deltaTime;
         switch (type)
         {
-            case InfoType.Kill:
+            case InfoType.Kill: // 킬 수 텍스트
                 UpdateKill();
                 break;
-            case InfoType.Time:
+            case InfoType.Time: // 생존 시간 텍스트
                 UpdateTime();
                 break;
-            case InfoType.CanCall:
+            case InfoType.CanCall: // 차량 호출 가능 텍스트
                 UpdateCanCall();
                 break;
-            case InfoType.CallTime:
+            case InfoType.CallTime: // 차량 도착까지 남은 시간 텍스트
                 UpdateCallTime(GameManager.instance.carSpec.callTime - StageManager.instance.tempTime, "도착까지 {0:D2}:{1:D2}");
                 break;
-            case InfoType.BoardTime:
+            case InfoType.BoardTime: // 탈출가능까지 남은 시간 텍스트
                 UpdateBoardTime(GameManager.instance.carSpec.boardTime - StageManager.instance.tempTime);
                 break;
-            case InfoType.WeaponStats:
+            case InfoType.WeaponStats: // 무기 정보 텍스트
                 UpdateWeaponStats();
                 break;
         }

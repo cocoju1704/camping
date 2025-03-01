@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class Block : MonoBehaviour
+public class Block : MonoBehaviour // 플레이어/적 공격에 부서지는 장애물
 {
     bool isActive = true;
 
@@ -26,7 +26,7 @@ public class Block : MonoBehaviour
 
     void Break() {
         isActive = false;
-        // 블록 파괴에 대한 추가적인 애니메이션이나 로직이 있다면 이곳에 추가 가능
+        // 애니메이션 추가
         gameObject.SetActive(false);
     }
 }

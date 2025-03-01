@@ -4,7 +4,7 @@ using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Events;
 public class DataManager : Singleton<DataManager>
-{
+{ // 게임 실행 시 데이터 로드 
     [Header("#Prefab")]
     public GameObject furniturePrefab;
     [Header("#Scriptable Data")]
@@ -25,24 +25,23 @@ public class DataManager : Singleton<DataManager>
     }
     // 데이터 로딩 관련
     void LoadAllData() {
+        // List 형태로 저장
         furnitureDataList = Resources.LoadAll<FurnitureData>("Data/Furnitures");
-        materialDataDict = new Dictionary<int, MaterialData>();
-        foreach (MaterialData materialData in Resources.LoadAll<MaterialData>("Data/Materials")) {
-            materialDataDict.Add(materialData.id, materialData);
-        }
         carPartsDataList = Resources.LoadAll<CarPartsData>("Data/CarParts");
-        weaponDataDict = new Dictionary<int, WeaponData>();
-        foreach (WeaponData weaponData in Resources.LoadAll<WeaponData>("Data/Weapons")) {
-            weaponDataDict.Add(weaponData.id, weaponData);
-        }
         lootDataList = Resources.LoadAll<LootData>("Data/Loots");
         enemyDataList = Resources.LoadAll<EnemyData>("Data/Enemies");
         bossDataList = Resources.LoadAll<EnemyData>("Data/Bosses");
         stageDataList = Resources.LoadAll<StageData>("Data/Stages");
+        materialDataDict = new Dictionary<int, MaterialData>();
+        weaponDataDict = new Dictionary<int, WeaponData>();
+        //amterial, weapon 데이터는 인덱스 기반으로 불러올 수 있도록 딕셔너리로 변환
+        foreach (MaterialData materialData in Resources.LoadAll<MaterialData>("Data/Materials")) {
+            materialDataDict.Add(materialData.id, materialData);
+        }
+        foreach (WeaponData weaponData in Resources.LoadAll<WeaponData>("Data/Weapons")) {
+            weaponDataDict.Add(weaponData.id, weaponData);
+        }
     }
-    void LoadAllPrefab() {
-    }
-
 }
 
 
@@ -65,7 +64,7 @@ public class CarSpec {
     }
 }
 [Serializable]
-public class PlayerSpec {
+public class PlayerSpec { //플레이어 기본 정보 묶음
     public float health;
     public int maxHealth;
     public float speed;
@@ -82,7 +81,7 @@ public class PlayerSpec {
 }
 
 [Serializable]
-public class GameData {
+public class GameData { // 저장해야될 데이터 묶음
     public PlayerSpec playerSpec;
     public int stageNo;
     public List<FurnitureIdLvPos> furnitureIdLvPos;
@@ -105,7 +104,7 @@ public class LevelUpMaterials {
     public List<Vector2Int> materials;
 }
 [Serializable]
-public class FurnitureIdLvPos {
+public class FurnitureIdLvPos { //배치된 가구의 위치와 레벨 묶음
     public int id;
     public int level;
     public Vector2Int pos;

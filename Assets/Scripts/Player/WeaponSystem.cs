@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using DG.Tweening;
 using UnityEngine.InputSystem;
 public class WeaponSystem : MonoBehaviour, ISavable
-{
+{  // 플레이어가 소유한 무기 관련 로직
     public Hand hand;
     public List<Weapon> weapons; // 0: primary, 1: secondary
     public Weapon currentWeapon;
@@ -65,7 +65,7 @@ public class WeaponSystem : MonoBehaviour, ISavable
 
 
 
-    public void DisableHands()
+    public void DisableWeapon() // 무기 비활성화 및 스프라이트 숨김
     {
         hand.gameObject.SetActive(false);
         hand.enabled = false;
@@ -75,7 +75,7 @@ public class WeaponSystem : MonoBehaviour, ISavable
         }
     }
 
-    public void EnableHands()
+    public void EnableWeapon() // 무기 활성화 및 스프라이트 활성화
     {
         hand.gameObject.SetActive(true);
         hand.enabled = true;

@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 
 public class FurnitureUpgradePopup : UpgradePopup {
+    // 가구 레벨 업그레이드 창
     public TMP_Text details;
     public override string CreateText() {
         string temp = data.effectDesc;

@@ -2,7 +2,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using Image = UnityEngine.UI.Image;
-public class Furniture : MonoBehaviour{
+public class Furniture : MonoBehaviour{ // 기본 가구 클래스
     public FurnitureData data;
     SpriteRenderer icon;
     BoxCollider2D collider;
@@ -30,7 +30,7 @@ public class Furniture : MonoBehaviour{
         }
         GameManager.instance.SetPlayerSpec();
     }
-    void OnTriggerEnter2D(Collider2D other) {
+    void OnTriggerEnter2D(Collider2D other) { // 가구에 플레이어 접촉시 해당 가구의 상호작용 팝업 띄우기
         if (other.CompareTag("Player") || !other.isTrigger) {
             popup.Set(data);
             popup.Toggle();

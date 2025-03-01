@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour {
+public class EnemyPathfinding : MonoBehaviour {
     public float speed;
     public bool isLive;
     Animator anim;
@@ -32,7 +32,6 @@ public class EnemyMovement : MonoBehaviour {
         isLive = enemy.isLive;
         if (!isLive || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit")) return;
         if (!isMoving) return;
-        // If the current attack is a melee charge, prevent normal movement logic
 
         Vector2 dirVec = target.position - rigid.position;
         Vector2 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime;
@@ -54,8 +53,9 @@ public class EnemyMovement : MonoBehaviour {
         Debug.DrawRay(transform.position, dirVec.normalized, Color.red);
     }
 
+    // Raycast 기반 길찾기
     bool IsObstacleInPath(Vector2 direction) {
-        float rayLength = 1.5f; // Ray 길이 조정
+        float rayLength = 2f; // Ray 길이 조정
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, rayLength, blockLayerMask);
 
         // Raycast 시각화
@@ -63,17 +63,16 @@ public class EnemyMovement : MonoBehaviour {
 
         return hit.collider != null;
     }
-
-    // 장애물 회피 방향을 계산하는 함수 (디버그용 회피 방향 확인)
+    // 장애물 우회 방향 계산
     Vector2 GetAvoidanceDirection(Vector2 originalDir) {
         Vector2 avoidanceDir = originalDir;
 
-        // 좌우로만 회피하는 것이 아니라 여러 방향을 탐색
         for (int i = 0; i < 8; i++) {
             float angle = i * 45f; // 8방향 탐색 (45도 간격)
-            Vector2 testDir = Quaternion.Euler(0, 0, angle) * originalDir;
-            if (!IsObstacleInPath(testDir)) {
-                avoidanceDir = testDir;
+            Vector2 tempDir = Quaternion.Euler(0, 0, angle + 90f) * originalDir;
+            
+            if (!IsObstacleInPath(tempDir)) {
+                avoidanceDir = tempDir;
                 break;
             }
         }

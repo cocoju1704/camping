@@ -10,7 +10,7 @@ public class ExplodingBullet : Bullet {
     public GameObject explosionEffect;
     void OnTriggerEnter2D(Collider2D collision) {
         base.OnTriggerEnter2D(collision);
-        if (pierce < 0) {
+        if (pierceCount < 0) {
             StartCoroutine(Explode());
         }
     }

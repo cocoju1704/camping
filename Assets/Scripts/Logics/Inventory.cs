@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class Inventory : MonoBehaviour
-{
+{ // 전투 스테이지에서 플레이어의 인벤토리
     [SerializeField] public Dictionary<int, int> itemList;
     public int maxInventory = 8;
     public UnityEvent onInventoryChange;
 
-    void Start() {
+    void Start() { 
         itemList = new Dictionary<int, int>();
         onInventoryChange = new UnityEvent();
         if (StageManager.instance != null) {
@@ -18,7 +18,7 @@ public class Inventory : MonoBehaviour
         InitForDebug();
     }
 
-    public void Obtain(Material material) {
+    public void Obtain(Material material) { // 재료가 충돌 시 호출
         if (itemList.ContainsKey(material.materialId)) {
             itemList[material.materialId] += 1;
         } else {
@@ -26,6 +26,7 @@ public class Inventory : MonoBehaviour
         }
         onInventoryChange.Invoke();
     }
+
     public void InitForDebug() {
         itemList.Add(0, 60);
         itemList.Add(1, 60);

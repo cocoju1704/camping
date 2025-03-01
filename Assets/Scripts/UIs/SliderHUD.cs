@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SliderHUD : MonoBehaviour
+public class SliderHUD : MonoBehaviour // HUD에 표시되는 슬라이더
 {
     public enum InfoType
     {

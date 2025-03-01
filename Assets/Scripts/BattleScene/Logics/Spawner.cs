@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class Spawner : MonoBehaviour
-{
+public class Spawner : MonoBehaviour { // BattleScene서 적 및 자원의 생성을 담당하는 스크립트
     public StageManager stageManager;
     public Transform[] spawnPoints;
     List<EnemyData> enemyData;
@@ -22,7 +21,7 @@ public class Spawner : MonoBehaviour
         spawnPoints = GetComponentsInChildren<Transform>();
         stageManager = GetComponent<StageManager>();
     }
-    public void Init() {
+    public void Init() { // 해당 스테이지의 데이터(SO)를 받아 초기화
         enemyData = stageManager.stageData.enemyDataList;
         bossData = stageManager.stageData.bossDataList;
         lootData = stageManager.stageData.lootDataList;
@@ -32,7 +31,7 @@ public class Spawner : MonoBehaviour
     }
     void Update()
     {
-        Debug();
+        //Debug();
         if (isDebugMode) return;
         transform.position = GameManager.instance.player.transform.position;
         stageTimer += Time.deltaTime;
@@ -51,7 +50,7 @@ public class Spawner : MonoBehaviour
             SpawnEnemy();
         }
     }
-    void SpawnEnemy() {
+    void SpawnEnemy() { // 풀매니저를 통해 스테이지 데이터에 등록된 적 중 래덤하게 생성
         GameObject enemy = PoolManager.instance.Get("Enemy");
         enemy.transform.position = spawnPoints[UnityEngine.Random.Range(1, spawnPoints.Length)].position;
         int rand = UnityEngine.Random.Range(0, enemyData.Count);

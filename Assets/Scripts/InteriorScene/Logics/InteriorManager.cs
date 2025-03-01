@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class InteriorManager : MonoBehaviour, ISavable
+public class InteriorManager : MonoBehaviour, ISavable // 로비 씬에서 캠핑카 내부 관리
 {
     // 가구 좌표계
     Dictionary<Vector2Int, InteriorTile> grid = new Dictionary<Vector2Int, InteriorTile>();

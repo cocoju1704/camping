@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ExteriorManager : MonoBehaviour, ITriggerObserver
-{
+{ // 로비 씬 캠핑카 외부 담당
     public GameObject playerOutsidePos;
     public GameObject playerInsidePos;
     public Canvas outdoorCanvas;

@@ -21,7 +21,7 @@ public class EnemyAction : MonoBehaviour {
     public int repeat;
     public GameObject projectile;
     WaitForFixedUpdate waitForFixedUpdate;
-    EnemyMovement enemyMovement;
+    EnemyPathfinding enemyMovement;
 
     void Awake() {
         rigid = GetComponent<Rigidbody2D>();
@@ -35,13 +35,12 @@ public class EnemyAction : MonoBehaviour {
     public void Init() {
         target = Player.instance.GetComponent<Rigidbody2D>();
         enemyActionData = GetComponent<Enemy>().enemyData.enemyActionData;
-        enemyMovement = GetComponent<EnemyMovement>();
+        enemyMovement = GetComponent<EnemyPathfinding>();
         SetNextAttack();
     }
 
     void Update() {
         timer += Time.deltaTime;
-
         if (timer > cooldown) {
             timer = 0;
             SetNextAttack();
@@ -51,11 +50,11 @@ public class EnemyAction : MonoBehaviour {
         }
     }
 
-    void SetNextAttack() {
+    void SetNextAttack() { // 다음 스킬 설정
         int random = Random.Range(0, enemyActionData.Length);
         attackType = enemyActionData[random].attackType;
         damage = enemyActionData[random].damage;
-        // 쿨다운 시간은 랜덤으로 설정
+        // 쿨다운 시간에 랜덤성 추가
         cooldown = enemyActionData[random].cooldown + Random.Range(-1, 1);
         count = enemyActionData[random].count;
         speed = enemyActionData[random].speed;
@@ -72,7 +71,7 @@ public class EnemyAction : MonoBehaviour {
         }
     }
 
-    void UseAttack() {
+    void UseAttack() { // Action 타입에 따른 스킬 함수 시전
         Debug.Log(attackType);
         switch (attackType) {
             case EnemyActionData.AttackType.Melee_Charge:
@@ -92,26 +91,24 @@ public class EnemyAction : MonoBehaviour {
         }           
     }
 
-    IEnumerator Range_Normal() {
+    IEnumerator Range_Normal() { // 일반 투사체 단일 원거리
         for (int i = 0; i < repeat; i++) {
             for (int j = 0; j < count; j++) {
                 Vector3 targetPos = target.position;
                 Vector3 dir = targetPos - transform.position;
                 dir.Normalize();
-                // spread 적용
                 dir = Quaternion.Euler(0, 0, Random.Range(-spread, spread)) * dir;
                 Transform newBullet = PoolManager.instance.Get(prefabId).transform;
                 newBullet.position = transform.position;
                 newBullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
                 newBullet.GetComponent<Bullet>().Init(damage, 0, 3, dir, speed);
-                // 0.1초 간격으로 발사
                 yield return new WaitForSeconds(0.1f);
             }
             yield return new WaitForSeconds(0.5f);
         }
     }
 
-    IEnumerator Melee_Charge() {
+    IEnumerator Melee_Charge() { // 일반 돌진 근거리
         // Stop movement during charge
         enemyMovement.isMoving = false;
         // 선딜
@@ -127,30 +124,25 @@ public class EnemyAction : MonoBehaviour {
         yield return waitForFixedUpdate; // 물리 업데이트 후 확인
         rigid.velocity = Vector2.zero; // 먼저 속도를 초기화
 
-        // 목표 방향으로 힘을 가합니다.
         rigid.AddForce(dir * speed, ForceMode2D.Impulse);
         // 후딜
         yield return new WaitForSeconds(0.5f);
         selfBullet.SetActive(false);
-        // Allow movement again after charge ends
         enemyMovement.isMoving = true;  
     }
 
-    IEnumerator Range_Spread() {
-        float spreadAngle = 10f; // Adjust this to control the spread width
+    IEnumerator Range_Spread() { // 일반 투사체 산발 원거리
+        float spreadAngle = 10f;
 
         for (int i = 0; i < repeat; i++) {
             for (int j = 0; j < count; j++) {
-                // Calculate the base direction
                 Vector3 targetPos = target.position;
                 Vector3 baseDir = targetPos - transform.position;
                 baseDir.Normalize();
 
-                // Calculate spread angle for each bullet
-                float angleOffset = spreadAngle * (j - (count - 1) / 2f); // Center the spread
+                float angleOffset = spreadAngle * (j - (count - 1) / 2f);
                 Vector3 dir = Quaternion.Euler(0, 0, angleOffset) * baseDir;
 
-                // Fire the bullet
                 Transform newBullet = PoolManager.instance.Get(prefabId).transform;
                 newBullet.position = transform.position;
                 newBullet.rotation = Quaternion.FromToRotation(Vector3.up, dir);
@@ -162,7 +154,7 @@ public class EnemyAction : MonoBehaviour {
         }
     }
 
-    IEnumerator CircleAttack() {
+    IEnumerator CircleAttack() { // 일반 투사체 원형 원거리
         //자신을 중심으로 원형으로 전방위 발사
         for (int i = 0; i < repeat; i++) {
             for (int j = 0; j < count; j++) {

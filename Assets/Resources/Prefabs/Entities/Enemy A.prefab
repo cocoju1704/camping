@@ -461,12 +461,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3596b07904fd4fd459025c9610df5621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
   health: 0
   maxHealth: 0
+  speed: 0
   exp: 0
   damage: 0
-  materialType: 0
+  materialID: 0
   dropRate: 0
   enemyData: {fileID: 0}
   animControllers:

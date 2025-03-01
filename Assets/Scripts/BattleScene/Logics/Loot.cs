@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class Loot : Unit
+public class Loot : Unit // 파괴 시 재료를 드랍하는 오브젝트
 {
     public LootData data;
 
@@ -16,7 +16,7 @@ public class Loot : Unit
         GetComponent<SpriteRenderer>().sprite = data.icon;
     }
 
-    void OnTriggerEnter2D(Collider2D collision) {
+    void OnTriggerEnter2D(Collider2D collision) { // 근접 공격에 맞으면 체력 감소
         if (health <= 0) {
             return;
         }
@@ -27,11 +27,11 @@ public class Loot : Unit
             StartCoroutine(DropLoot());
         }
     }
-    void OnTriggerExit2D(Collider2D collision) {
+    void OnTriggerExit2D(Collider2D collision) { // 화면 밖으로 나가면 비활성화
         if (!collision.CompareTag("Area")) return;
         gameObject.SetActive(false);
     }
-    IEnumerator DropLoot() {
+    IEnumerator DropLoot() { // 파괴시 재료 드랍
         if (health <= 0) {
             for (int i = 0; i < data.materialPair.Count; i++) {
                 for (int j = 0; j < data.materialPair[i].y; j++) {

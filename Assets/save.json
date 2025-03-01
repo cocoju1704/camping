@@ -1,98 +1,14 @@
 {
   "playerSpec": {
-    "health": 84.0,
+    "health": 100.0,
     "maxHealth": 100,
     "speed": 5.0
   },
   "stageNo": 0,
-  "furnitureIdLvPos": [
-    {
-      "id": 4,
-      "level": 3,
-      "pos": {
-        "x": 0,
-        "y": 4,
-        "magnitude": 4.0,
-        "sqrMagnitude": 16
-      }
-    },
-    {
-      "id": 0,
-      "level": 1,
-      "pos": {
-        "x": 0,
-        "y": 0,
-        "magnitude": 0.0,
-        "sqrMagnitude": 0
-      }
-    },
-    {
-      "id": 3,
-      "level": 4,
-      "pos": {
-        "x": 3,
-        "y": 0,
-        "magnitude": 3.0,
-        "sqrMagnitude": 9
-      }
-    },
-    {
-      "id": 5,
-      "level": 4,
-      "pos": {
-        "x": 5,
-        "y": 0,
-        "magnitude": 5.0,
-        "sqrMagnitude": 25
-      }
-    },
-    {
-      "id": 6,
-      "level": 1,
-      "pos": {
-        "x": 8,
-        "y": 0,
-        "magnitude": 8.0,
-        "sqrMagnitude": 64
-      }
-    },
-    {
-      "id": 2,
-      "level": 1,
-      "pos": {
-        "x": 11,
-        "y": 2,
-        "magnitude": 11.18034,
-        "sqrMagnitude": 125
-      }
-    },
-    {
-      "id": 1,
-      "level": 1,
-      "pos": {
-        "x": 2,
-        "y": 3,
-        "magnitude": 3.60555124,
-        "sqrMagnitude": 13
-      }
-    }
-  ],
-  "storage": {
-    "0": 77,
-    "1": 95,
-    "2": 100,
-    "3": 96,
-    "4": 116,
-    "5": 120,
-    "6": 106,
-    "100": 2,
-    "101": 1,
-    "102": 2,
-    "103": 4,
-    "104": 2
-  },
+  "furnitureIdLvPos": [],
+  "storage": {},
   "vehicleLevels": [
-    2,
+    0,
     0,
     0,
     0
@@ -108,7 +24,7 @@
     },
     {
       "Key": 201,
-      "Value": 4
+      "Value": 0
     },
     {
       "Key": 202,
@@ -128,10 +44,10 @@
     }
   ],
   "playerSelectedWeapon": {
-    "x": 201,
+    "x": 302,
     "y": 1,
-    "magnitude": 201.002487,
-    "sqrMagnitude": 40402
+    "magnitude": 302.001648,
+    "sqrMagnitude": 91205
   },
   "stageNoList": [],
   "stageNoIdx": 0

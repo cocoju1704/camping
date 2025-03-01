@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f2412a9aaceaf2489918f61d7357698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigid: {fileID: 0}
   slowDownRate: 1
   disappearTime: 3
   timer: 0
-  rigid: {fileID: 0}

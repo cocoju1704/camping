@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Image = UnityEngine.UI.Image;
 public class UpgradePopup : MonoBehaviour, IToggleable
-{
+{ // 가구, 무기 등 업그레이드 효과와 요구 재료를 안내해주는 UI
     [Header("데이터")]
     public FurnitureData data;
     [Header("내부 오브젝트")]

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
-public class StageManager : Singleton<StageManager> {
+public class StageManager : Singleton<StageManager> { // 전투 스테이지 데이터 관리
     [Header("스테이지 데이터")]
     public StageData stageData;
     [Header("스테이지 연관 오브젝트")]

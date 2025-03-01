@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class FurnitureSelectionPopup : MonoBehaviour, IToggleable
-{
+{ // 제작할 가구 선택창
     [Header("데이터")]
     public FurnitureData[] furnitureList;
     public int index;

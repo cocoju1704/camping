@@ -518,7 +518,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
@@ -544,7 +544,6 @@ MonoBehaviour:
   meleeBonusKnockback: 0
   stamina: 100
   maxStamina: 100
-  staminaCost: 100
   isSprinting: 0
   inputVec: {x: 0, y: 0}
   scanner: {fileID: 7635642347628094678}

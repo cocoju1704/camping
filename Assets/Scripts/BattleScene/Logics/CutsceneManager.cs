@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using Unity.VisualScripting;
 
-public class CutsceneManager : MonoBehaviour
+public class CutsceneManager : MonoBehaviour // 전투 씬에서 일어나는 컷씬 관련 함수들
 {
     [Header("연관 오브젝트")]
     public Spawner spawner;
@@ -17,7 +17,7 @@ public class CutsceneManager : MonoBehaviour
     public GameObject player;
     public GameObject ground;
     public Button escapeButton;
-    public HUD timer;
+    public TextHUD timer;
 
     [Header("캔버스")]
     public GameObject Canvas;
@@ -130,13 +130,13 @@ public class CutsceneManager : MonoBehaviour
         ConfigureEscapeButton(StageManager.instance.onStageWrapUp.Invoke, false);
 
         // Call Timer 시작
-        yield return RunTimer(HUD.InfoType.CallTime, callTime);
+        yield return RunTimer(TextHUD.InfoType.CallTime, callTime);
 
         // 밴 호출
         CallVan();
 
         // Board Timer 시작
-        yield return RunTimer(HUD.InfoType.BoardTime, boardTime);
+        yield return RunTimer(TextHUD.InfoType.BoardTime, boardTime);
 
         // 버튼 다시 활성화
         escapeButton.interactable = true;
@@ -180,7 +180,7 @@ public class CutsceneManager : MonoBehaviour
     }
 
     // 타이머 실행
-    IEnumerator RunTimer(HUD.InfoType timerType, float duration)
+    IEnumerator RunTimer(TextHUD.InfoType timerType, float duration)
     {
         timer.ChangeTypeTo(timerType);
         StageManager.instance.tempTime = 0;

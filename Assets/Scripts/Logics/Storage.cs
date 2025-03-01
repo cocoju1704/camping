@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Storage : MonoBehaviour, ISavable {
+    // 캠핑카의 인벤토리
     public Dictionary<int, int> itemList;
     void Awake() {
         itemList = new Dictionary<int, int>();
         Debug();
     }
-    // Storage 관련
     public void AddToStorage(int id, int amount) {
         if (itemList.ContainsKey(id)) {
             itemList[id] += amount;
@@ -15,6 +15,7 @@ public class Storage : MonoBehaviour, ISavable {
             itemList.Add(id, amount);
         }
     }
+    // 전투에서 플레이어의 인벤토리 아이템 캠핑카 인벤토리로 이동
     public void AddToStorage(Dictionary<int, int> inventory) {
         foreach (KeyValuePair<int, int> item in inventory) {
             AddToStorage(item.Key, item.Value);

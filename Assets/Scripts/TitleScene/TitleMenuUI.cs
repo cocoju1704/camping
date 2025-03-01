@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TitleMenu : MonoBehaviour
+public class TitleMenuUI : MonoBehaviour // 시작화면 UI 
 {
     public Button[] buttons;
-    // Start is called before the first frame update
     void Awake()
     {
 
-        buttons = GetComponentsInChildren<Button>(); //0: Start, 1: Continue, 2: Exit
+        buttons = GetComponentsInChildren<Button>(); 
         buttons[0].onClick.AddListener(() => StartNewGame());
         buttons[1].onClick.AddListener(() => ContinueGame());
         buttons[2].onClick.AddListener(() => ExitGame());
