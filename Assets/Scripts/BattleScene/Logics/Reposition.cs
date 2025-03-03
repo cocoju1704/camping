@@ -9,16 +9,14 @@ public class Reposition : MonoBehaviour // 뱀서라이크의 무한맵 구현�
     Vector3 startPos;
     public bool[,] grid = new bool[32, 20];
     public List<GameObject> blocks = new List<GameObject>();
-    private List<Vector2Int[]> precomputedPatterns;
+    const int maxLootCount = 5;
+
     void Awake() {
         collider = GetComponent<Collider2D>();
         startPos = transform.position;
-
-
     }
     void Start() {
         if (transform.CompareTag("Ground")) {
-            precomputedPatterns = GetPrecomputedPatterns(); // 블록 배치 패턴
             StartCoroutine(DelayedSetLandScape());
         }
     }
@@ -30,14 +28,14 @@ public class Reposition : MonoBehaviour // 뱀서라이크의 무한맵 구현�
         Vector3 playerPos = GameManager.instance.player.transform.position;
         Vector3 myPos = transform.position;
         if (transform.CompareTag("Bullet") || transform.CompareTag("Loot") || transform.CompareTag("EnemyBullet")) {
-            HandleBulletReposition();
+            HandleEntityReposition();
         } else if (transform.CompareTag("Ground")) {
             HandleGroundReposition(playerPos, myPos);
         } else if (transform.CompareTag("Enemy") && collider.enabled) {
             HandleEnemyReposition(playerPos, myPos);
         }
     }
-    void HandleBulletReposition() {
+    void HandleEntityReposition() {
         gameObject.SetActive(false);
     }
     void HandleGroundReposition(Vector3 playerPos, Vector3 myPos) {
@@ -64,31 +62,17 @@ public class Reposition : MonoBehaviour // 뱀서라이크의 무한맵 구현�
         transform.Translate(ran + dist * 2);
     }
 
-    private Vector2Int[] GetRandomPattern() {
-        return precomputedPatterns[UnityEngine.Random.Range(0, precomputedPatterns.Count)];
-    }
-    private List<Vector2Int[]> GetPrecomputedPatterns() {
-    List<Vector2Int[]> patterns = new List<Vector2Int[]>();
-    patterns.Add(new Vector2Int[] {
-        new Vector2Int(-4, -4), new Vector2Int(-3, -4), new Vector2Int(-2, -4), new Vector2Int(-1, -4), new Vector2Int(0, -4),
-        new Vector2Int(-4, -4), new Vector2Int(-3, -4), new Vector2Int(-2, -4), new Vector2Int(-1, -4), new Vector2Int(0, -4),
-        new Vector2Int(-4, -3), new Vector2Int(-3, -3), new Vector2Int(-2, -3), new Vector2Int(-1, -3), new Vector2Int(0, -3),
-        new Vector2Int(-4, -2), new Vector2Int(-3, -2), new Vector2Int(-2, -2), new Vector2Int(-1, -2), new Vector2Int(0, -2),
-        new Vector2Int(-4, -1), new Vector2Int(-3, -1), new Vector2Int(-2, -1), new Vector2Int(-1, -1), new Vector2Int(0, -1),
-        new Vector2Int(-4, 0), new Vector2Int(-3, 0), new Vector2Int(-2, 0), new Vector2Int(-1, 0), new Vector2Int(0, 0),
-        new Vector2Int(-4, 0), new Vector2Int(-3, 0), new Vector2Int(-2, 0), new Vector2Int(-1, 0),
-        new Vector2Int(-1, 1), new Vector2Int(-1, 2), new Vector2Int(-1, 3), new Vector2Int(-2, 3), new Vector2Int(-3, 3)
-    });
-    return patterns;
-    }
-
     IEnumerator DelayedSetLandScape() {
         yield return new WaitForSeconds(0.1f);
         SetLandScape();
     }
     
-    public void SetLandScape() { // 타일맵에 블록 및 자원 배치
+    public void SetLandScape() { // 타일맵 재배치 시 블록 및 자원 배치
         ResetGrid();
+        SetBlock();
+        SetLoot();
+    }
+    void SetBlock() {
         Vector3[] offsets = {
             transform.position + new Vector3(-16, -10, 0) + new Vector3(0.5f, 0.5f, 0),
             transform.position + new Vector3(-16, -10, 0) + new Vector3(0.5f, 1f, 0),
@@ -98,7 +82,7 @@ public class Reposition : MonoBehaviour // 뱀서라이크의 무한맵 구현�
 
         for (int i = 0; i < 5; i++) {
             Vector2Int centerPos = new Vector2Int(UnityEngine.Random.Range(0, 32), UnityEngine.Random.Range(0, 20));
-            Vector2Int[] pattern = GetRandomPattern();
+            Vector2Int[] pattern = Utils.GetRandomBlockPattern();
             List<GameObject> newBlocks = new List<GameObject>();
             foreach (Vector2Int offsetPos in pattern) {
                 Vector2Int pos = centerPos + offsetPos;
@@ -117,33 +101,25 @@ public class Reposition : MonoBehaviour // 뱀서라이크의 무한맵 구현�
             }
             blocks.AddRange(newBlocks);
         }
-        SetLoot();
     }
-
     void SetLoot() { // 랜덤하게 자원 배치
         Vector3 offset = transform.position + new Vector3(-16, -10, 0) + new Vector3(0.5f, 0.5f, 0);
-
-        for (int i = 0; i < 5; i++) {
+        for (int lootCount = 0; lootCount < maxLootCount; lootCount++) {
             Vector2Int centerPos = new Vector2Int(UnityEngine.Random.Range(0, 32), UnityEngine.Random.Range(0, 20));
-
             if (grid[centerPos.x, centerPos.y]) continue;
-
             grid[centerPos.x, centerPos.y] = true;
-
             GameObject loot = PoolManager.instance.Get("Loot");
             loot.transform.localPosition = new Vector3(centerPos.x, centerPos.y, 0) + offset;
-
             int rand = UnityEngine.Random.Range(0, DataManager.instance.lootDataList.Length);
             loot.GetComponent<Loot>().Init(DataManager.instance.lootDataList[rand]);
-
             blocks.Add(loot);
         }
     }
 
     void ResetGrid() { // Reposition 시 타일맵 초기화
-        for (int x = 0; x < 32; x++) {
-            for (int y = 0; y < 20; y++) {
-                grid[x, y] = false;
+        for (int tileWidth = 0; tileWidth < 32; tileWidth++) {
+            for (int tileHeight = 0; tileHeight < 20; tileHeight++) {
+                grid[tileWidth, tileHeight] = false;
             }
         }
         foreach (GameObject block in blocks) {
@@ -152,8 +128,8 @@ public class Reposition : MonoBehaviour // 뱀서라이크의 무한맵 구현�
         }
     }
     // 타일맵 바깥 조건
-    bool IsOutOfBounds(int x, int y) {
-        return x < 0 || x >= 32 || y < 0 || y >= 20;
+    bool IsOutOfBounds(int tileWidth, int tileHeight) {
+        return tileWidth < 0 || tileWidth >= 32 || tileHeight < 0 || tileHeight >= 20;
     }
     // 탈출 페이즈로 전환 시 타일맵 초기화
     public void ResetGround() {

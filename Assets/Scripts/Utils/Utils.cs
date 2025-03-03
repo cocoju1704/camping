@@ -21,4 +21,29 @@ public static class Utils {
         Vector2 realPos = new Vector2(pos.x + offsetX, pos.y + offsetY);
         return realPos;
     }
+    public static List<Vector2Int[]> _precomputedPatterns;
+    public static List<Vector2Int[]> precomputedPatterns {
+        get {
+            if (_precomputedPatterns == null) {
+                _precomputedPatterns = new List<Vector2Int[]>
+                {
+                    new Vector2Int[] {
+                    new Vector2Int(-4, -4), new Vector2Int(-3, -4), new Vector2Int(-2, -4), new Vector2Int(-1, -4), new Vector2Int(0, -4),
+                    new Vector2Int(-4, -4), new Vector2Int(-3, -4), new Vector2Int(-2, -4), new Vector2Int(-1, -4), new Vector2Int(0, -4),
+                    new Vector2Int(-4, -3), new Vector2Int(-3, -3), new Vector2Int(-2, -3), new Vector2Int(-1, -3), new Vector2Int(0, -3),
+                    new Vector2Int(-4, -2), new Vector2Int(-3, -2), new Vector2Int(-2, -2), new Vector2Int(-1, -2), new Vector2Int(0, -2),
+                    new Vector2Int(-4, -1), new Vector2Int(-3, -1), new Vector2Int(-2, -1), new Vector2Int(-1, -1), new Vector2Int(0, -1),
+                    new Vector2Int(-4, 0), new Vector2Int(-3, 0), new Vector2Int(-2, 0), new Vector2Int(-1, 0), new Vector2Int(0, 0),
+                    new Vector2Int(-4, 0), new Vector2Int(-3, 0), new Vector2Int(-2, 0), new Vector2Int(-1, 0),
+                    new Vector2Int(-1, 1), new Vector2Int(-1, 2), new Vector2Int(-1, 3), new Vector2Int(-2, 3), new Vector2Int(-3, 3)
+                }
+                };
+            }
+            return _precomputedPatterns;
+        }
+    }
+
+    public static Vector2Int[] GetRandomBlockPattern() {
+        return precomputedPatterns[UnityEngine.Random.Range(0, precomputedPatterns.Count)];
+    }
 }
