@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ranged_Circle_0
   m_EditorClassIdentifier: 
   attackType: 4
-  projectile: {fileID: 2235698528570834797, guid: b622803c5748abe43895efea7fefefcc, type: 3}
+  projectile: {fileID: 4486712295054743051, guid: 6ba7cabfe1d0e88408606b9636165bda, type: 3}
   damage: 2
   cooldown: 4
   count: 18

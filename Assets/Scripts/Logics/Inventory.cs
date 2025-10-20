@@ -9,12 +9,9 @@ public class Inventory : MonoBehaviour
     public int maxInventory = 8;
     public UnityEvent onInventoryChange;
 
-    void Start() { 
+    void Start() {
         itemList = new Dictionary<int, int>();
         onInventoryChange = new UnityEvent();
-        if (StageManager.instance != null) {
-            StageManager.instance.onStageWrapUp.AddListener(AddToStorage);
-        }
         InitForDebug();
     }
 

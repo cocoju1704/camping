@@ -18,9 +18,10 @@ public class EnemyData : ScriptableObject
     public int materialType;
     public int dropRate;
     [Header("# Visual")]
+    public GameObject enemyPrefab;
     public int spriteType;
     [Header("# Actions")]
-    public EnemyActionData[] enemyActionData;
+    public EnemyActionData[] enemyActionDataList;
 
 
 }

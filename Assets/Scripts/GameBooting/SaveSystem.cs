@@ -20,12 +20,12 @@ public class SaveSystem : Singleton<SaveSystem>
         saveFilePath = Path.Combine(Application.dataPath, saveFileName);
     }
     void OnApplicationQuit() {
-        SaveFile();
+        //SaveAll();
     }
     public bool SaveFileExists() {
         return File.Exists(saveFilePath);
     }
-    public bool SaveFile() {
+    public bool SaveAll() {
         GameData data = new GameData();
         List<ISavable> savables = FindObjectsOfType<MonoBehaviour>().OfType<ISavable>().ToList();
         foreach (ISavable savable in savables) {
@@ -35,8 +35,10 @@ public class SaveSystem : Singleton<SaveSystem>
         File.WriteAllText(saveFilePath, json);
         return true;
     }
-    public bool LoadFile() {
-        if(!File.Exists(saveFilePath)) {
+    public bool LoadAll()
+    {
+        if (!File.Exists(saveFilePath))
+        {
             return false;
         }
 
@@ -44,10 +46,10 @@ public class SaveSystem : Singleton<SaveSystem>
         GameData gameData = JsonConvert.DeserializeObject<GameData>(jsonFormat, settings);
 
         List<ISavable> savables = FindObjectsOfType<MonoBehaviour>().OfType<ISavable>().ToList();
-        foreach(ISavable savable in savables) {
-            savable.Load(gameData);
-        }
-
+        SaveBus.Publish("GameManager", gameData);
+        SaveBus.Publish("InteriorSystem", gameData);
+        SaveBus.Publish("Storage", gameData);
+        SaveBus.Publish("WeaponSystem", gameData);
         return true;
     }
 

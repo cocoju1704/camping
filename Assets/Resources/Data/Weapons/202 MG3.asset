@@ -61,5 +61,5 @@ MonoBehaviour:
   - 0
   magazine: 64000000780000008c000000a0000000c8000000
   reload: 5
-  projectile: {fileID: 2235698528570834797, guid: 388ee7d5289ee0e429b6673ce574f74d, type: 3}
+  projectile: {fileID: 5857910250092960206, guid: 51d387d8d61297943889b4a0b3c55440, type: 3}
   speed: 20

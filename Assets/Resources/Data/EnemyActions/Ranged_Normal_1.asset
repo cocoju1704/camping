@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ranged_Normal_1
   m_EditorClassIdentifier: 
   attackType: 1
-  projectile: {fileID: 2235698528570834797, guid: b622803c5748abe43895efea7fefefcc, type: 3}
+  projectile: {fileID: 9001426808400671711, guid: 73e835f89bd43cf47956a634e4eeea86, type: 3}
   damage: 3
   cooldown: 5
   count: 5

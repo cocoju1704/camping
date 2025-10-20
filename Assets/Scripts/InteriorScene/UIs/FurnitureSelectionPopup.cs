@@ -22,13 +22,13 @@ public class FurnitureSelectionPopup : MonoBehaviour, IToggleable
     public Button furintureCreate;
     public Button showHideButton;
     [Header("외부 오브젝트")]
-    public InteriorManager interiorSystem;
+    public InteriorSystem interiorSystem;
     [Header("기타")]
     public Vector2Int playerPos;
     public void Start() {
         furnitureList = DataManager.instance.furnitureDataList;
         index = 0;
-        interiorSystem = FindObjectOfType<InteriorManager>();
+        interiorSystem = FindObjectOfType<InteriorSystem>();
         toLeft.onClick.AddListener(ToLeft);
         toRight.onClick.AddListener(ToRight);
         showHideButton.onClick.AddListener(Toggle);
@@ -68,7 +68,7 @@ public class FurnitureSelectionPopup : MonoBehaviour, IToggleable
     void CreateFurniture() {
         // 플레이어 발이 기준이라 -0.5f 해줘야함
         Vector3 playerPos = Player.instance.transform.position - new Vector3(0, 0.5f, 0);
-        interiorSystem.PlaceFurniture(Utils.WorldToGrid(playerPos), furnitureList[index]);
+        interiorSystem.TryPlaceFurniture(Utils.WorldToGrid(playerPos), furnitureList[index]);
         Toggle();
     }
 }

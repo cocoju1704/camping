@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,12 +22,12 @@ public class TitleMenuUI : MonoBehaviour // 시작화면 UI
         
     }
     void StartNewGame() {
-        SceneLoadSystem.instance.LoadScene("LobbyScene");
+        SceneFlowManager.instance.EnterLobby();
 
     }
     void ContinueGame() {
         // 로딩
-        SceneLoadSystem.instance.LoadScene("LobbyScene");
+        SceneFlowManager.instance.EnterLobby();
     }
     
     void ExitGame() {

@@ -11,8 +11,8 @@ public class Spawner : MonoBehaviour { // BattleScene서 적 및 자원의 생�
     List<LootData> lootData;
     float earlySpawnTime;
     float lateSpawnTime;
-    float stageTimer = 0f;
-    float monsterTimer = 0;
+    float stageTimer; // 스테이지 진행 시간
+    float monsterTimer = 0; // 적 스폰 타이머. 적 스폰 간격에 도달하면 적을 스폰하고 초기화
     static float stageMaxTime = 30f;
     float enemySpawnTime;
     [Header("# Debug")]
@@ -21,25 +21,29 @@ public class Spawner : MonoBehaviour { // BattleScene서 적 및 자원의 생�
         spawnPoints = GetComponentsInChildren<Transform>();
         stageManager = GetComponent<StageManager>();
     }
-    public void Init() { // 해당 스테이지의 데이터(SO)를 받아 초기화
+    public void Init()
+    { // 해당 스테이지의 데이터(SO)를 받아 초기화
         enemyData = stageManager.stageData.enemyDataList;
         bossData = stageManager.stageData.bossDataList;
         lootData = stageManager.stageData.lootDataList;
         earlySpawnTime = stageManager.stageData.earlySpawnTime;
         lateSpawnTime = stageManager.stageData.lateSpawnTime;
-        enemySpawnTime = stageManager.stageData.earlySpawnTime;
+        stageManager.onStageMaxTime.AddListener(SpawnBoss);
+        
     }
     void Update()
     {
         //Debug();
         if (isDebugMode) return;
         transform.position = GameManager.instance.player.transform.position;
-        stageTimer += Time.deltaTime;
-        monsterTimer += Time.deltaTime;
+        stageTimer = StageManager.instance.currentTime;
+        if (stageTimer > stageMaxTime) stageTimer = stageMaxTime;
         enemySpawnTime = Mathf.Lerp(earlySpawnTime, lateSpawnTime, stageTimer / stageMaxTime);
-        if (monsterTimer > enemySpawnTime) {
+        monsterTimer += Time.deltaTime;
+        if (monsterTimer > enemySpawnTime)
+        {
             monsterTimer = 0;
-            SpawnEnemy();
+            //SpawnEnemy();
         }
     }
     void Debug() {
@@ -56,16 +60,18 @@ public class Spawner : MonoBehaviour { // BattleScene서 적 및 자원의 생�
         int rand = UnityEngine.Random.Range(0, enemyData.Count);
         enemy.GetComponent<Enemy>().Init(enemyData[rand]);
     }
-    public void SpawnBoss() {
+    public void SpawnBoss()
+    {
         GameObject enemy = PoolManager.instance.Get("Enemy");
         enemy.transform.position = spawnPoints[UnityEngine.Random.Range(1, spawnPoints.Length)].position;
         enemy.GetComponent<Enemy>().Init(bossData[0]);
         // 크기 5배
         enemy.transform.localScale = new Vector3(5, 5, 5);
         //freeze xy position
-        enemy.GetComponent<Rigidbody2D>().mass =10;
+        enemy.GetComponent<Rigidbody2D>().mass = 10;
         // Reposition 비활성화
         enemy.GetComponent<Reposition>().enabled = false;
+        enemy.GetComponent<Enemy>().isBoss = true;
     }
 
 }

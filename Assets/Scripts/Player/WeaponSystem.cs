@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class WeaponSystem : MonoBehaviour, ISavable
 {  // 플레이어가 소유한 무기 관련 로직
     public Hand hand;
+    public List<WeaponData> weaponDataList;
     public List<Weapon> weapons; // 0: primary, 1: secondary
     public Weapon currentWeapon;
     public Scanner sc;
@@ -16,6 +17,7 @@ public class WeaponSystem : MonoBehaviour, ISavable
     public UnityEvent onWeaponLevelUp = new UnityEvent();
     public int currentWeaponIndex = 0; // 현재 선택된 무기 인덱스
     private Coroutine showWeaponNameCoroutine;
+    public string SaveKey => "WeaponSystem";
 
     void Awake()
     {
@@ -24,6 +26,7 @@ public class WeaponSystem : MonoBehaviour, ISavable
         currentWeapon = weapons[0]; // 첫 번째 무기를 기본으로 선택
         targetPos = Vector3.zero;
         onWeaponLevelUp.AddListener(UpdateWeaponStats);
+        SaveBus.Register(this);
     }
     void Start() {
         InitWeapons();
@@ -54,13 +57,6 @@ public class WeaponSystem : MonoBehaviour, ISavable
         targetPos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         targetPos.z = 0;
         RotateHand(targetPos);
-
-        if (Keyboard.current.spaceKey.wasPressedThisFrame) SwitchWeapon();
-        if (Keyboard.current.rKey.wasPressedThisFrame) {
-            if (!currentWeapon.isMelee && currentWeapon.canClick) {
-                StartCoroutine(currentWeapon.Reload());
-            }
-        }
     }
 
 
@@ -74,7 +70,12 @@ public class WeaponSystem : MonoBehaviour, ISavable
             weapon.enabled = false;
         }
     }
-
+    public void CheckClickableAndReload()
+    {
+        if (currentWeapon.isMelee) return;
+        if (currentWeapon.canClick) return;
+        StartCoroutine(currentWeapon.Reload());
+    }
     public void EnableWeapon() // 무기 활성화 및 스프라이트 활성화
     {
         hand.gameObject.SetActive(true);
@@ -103,6 +104,7 @@ public class WeaponSystem : MonoBehaviour, ISavable
     // 무기 관련 함수들
     public void SetPrimaryWeapon(int id)
     {
+        Debug.Log("WeaponID: " + id);
         SetWeapon(0, DataManager.instance.weaponDataDict[id]);
     }
     public void SetPrimaryWeapon(WeaponData weaponData) {
@@ -180,6 +182,7 @@ public class WeaponSystem : MonoBehaviour, ISavable
         data.obtainedWeaponLvs = obtainedWeaponLvs;
         data.playerSelectedWeapon[0] = weapons[0].weaponData.id;
         data.playerSelectedWeapon[1] = weapons[1].weaponData.id;
+        Debug.Log("WeaponSystem saved. Primary: " + data.playerSelectedWeapon[0] + ", Secondary: " + data.playerSelectedWeapon[1]);
     }
 
     public void Load(GameData data)

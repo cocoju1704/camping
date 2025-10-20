@@ -54,7 +54,7 @@ public class CraftingTablePopup : UpgradePopup { // 조합대 팝업창
     }
     public override void Upgrade() {
         base.Upgrade();
-        maxIndex = MaterialRecipe.findMaxIndex((int)data.levelNums[level]);
+        maxIndex = MaterialRecipe.findMaxIndex((int)data.levelNums[GetLevel()]);
         Debug.Log(maxIndex);
     }
 }

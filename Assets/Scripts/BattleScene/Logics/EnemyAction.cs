@@ -34,7 +34,7 @@ public class EnemyAction : MonoBehaviour {
 
     public void Init() {
         target = Player.instance.GetComponent<Rigidbody2D>();
-        enemyActionData = GetComponent<Enemy>().enemyData.enemyActionData;
+        enemyActionData = GetComponent<Enemy>().enemyData.enemyActionDataList;
         enemyMovement = GetComponent<EnemyPathfinding>();
         SetNextAttack();
     }
@@ -72,10 +72,9 @@ public class EnemyAction : MonoBehaviour {
     }
 
     void UseAttack() { // Action 타입에 따른 스킬 함수 시전
-        Debug.Log(attackType);
         switch (attackType) {
-            case EnemyActionData.AttackType.Melee_Charge:
-                StartCoroutine(Melee_Charge());
+            case EnemyActionData.AttackType.Melee_Charge_Short:
+                StartCoroutine(Melee_Charge_Short());
                 break;
             case EnemyActionData.AttackType.Ranged_Normal:
                 StartCoroutine(Range_Normal());
@@ -85,6 +84,9 @@ public class EnemyAction : MonoBehaviour {
                 break;
             case EnemyActionData.AttackType.Ranged_Circle:
                 StartCoroutine(CircleAttack());
+                break;
+            case EnemyActionData.AttackType.Melee_Charge_Long:
+                StartCoroutine(Melee_Charge_Long());
                 break;
             default:
                 break;
@@ -108,29 +110,37 @@ public class EnemyAction : MonoBehaviour {
         }
     }
 
-    IEnumerator Melee_Charge() { // 일반 돌진 근거리
+    IEnumerator Melee_Charge_Short() { // 일반 돌진 근거리
         // Stop movement during charge
         enemyMovement.isMoving = false;
         // 선딜
-        selfBullet.SetActive(true);
         Vector3 targetPos = target.position;
         Vector3 dir = (targetPos - transform.position).normalized;
-        selfBullet.transform.rotation = Quaternion.FromToRotation(Vector3.right, dir);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);
+        selfBullet.SetActive(true);
         targetPos = target.position;
         dir = (targetPos - transform.position).normalized;
         selfBullet.transform.rotation = Quaternion.FromToRotation(Vector3.right, dir);
         if (!enemyMovement.isLive) yield break;
         yield return waitForFixedUpdate; // 물리 업데이트 후 확인
         rigid.velocity = Vector2.zero; // 먼저 속도를 초기화
-
         rigid.AddForce(dir * speed, ForceMode2D.Impulse);
         // 후딜
         yield return new WaitForSeconds(0.5f);
         selfBullet.SetActive(false);
         enemyMovement.isMoving = true;  
     }
-
+    IEnumerator Melee_Charge_Long()
+    {
+        // N초동안 충돌 대미지 활성화 및 이동속도 증가
+        yield return new WaitForSeconds(0.2f);
+        enemyMovement.speed *= 2;
+        selfBullet.SetActive(true);
+        if (!enemyMovement.isLive) yield break; // 적이 죽었으면 중단
+        yield return new WaitForSeconds(2.0f);
+        enemyMovement.speed /= 2;
+        selfBullet.SetActive(false);
+    }
     IEnumerator Range_Spread() { // 일반 투사체 산발 원거리
         float spreadAngle = 10f;
 

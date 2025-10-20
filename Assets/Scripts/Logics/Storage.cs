@@ -4,14 +4,24 @@ using UnityEngine;
 public class Storage : MonoBehaviour, ISavable {
     // 캠핑카의 인벤토리
     public Dictionary<int, int> itemList;
-    void Awake() {
+    public string SaveKey => "Storage";
+    void Awake()
+    {
         itemList = new Dictionary<int, int>();
         Debug();
+        SaveBus.Register(this);
     }
-    public void AddToStorage(int id, int amount) {
-        if (itemList.ContainsKey(id)) {
+    void OnDestroy() {
+        SaveBus.Unregister(this);
+    }
+    public void AddToStorage(int id, int amount)
+    {
+        if (itemList.ContainsKey(id))
+        {
             itemList[id] += amount;
-        } else {
+        }
+        else
+        {
             itemList.Add(id, amount);
         }
     }

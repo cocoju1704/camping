@@ -21,54 +21,52 @@ public class UpgradePopup : MonoBehaviour, IToggleable
 
     public IngredientPopup ingredientPopup;
     [Header("외부 오브젝트")]
-    public InteriorManager interiorSystem;
-
-    [Header("내부 변수")]
-    public int level;
-
-    public virtual void Start() {
+    public InteriorSystem interiorSystem;
+    public virtual void Start()
+    {
         furnitureUpgrade.onClick.AddListener(Upgrade);
-        interiorSystem = FindObjectOfType<InteriorManager>();
+        interiorSystem = FindObjectOfType<InteriorSystem>();
         Toggle();
     }
 
-    public virtual void Set(FurnitureData data) {
+    public virtual void Set(FurnitureData data)
+    {
         this.data = data;
         UpdateUI();
     }
-    public void UpdateUI() {
+    public void UpdateUI()
+    {
         Debug.Log("InteriorSystem: " + interiorSystem);
         Debug.Log("data: " + data);
-        level = interiorSystem.FindFurnitureLv(data.id);
         icon.sprite = data.icon;
         furnitureName.text = data.itemName;
         desc.text = CreateText();
-        ingredientPopup.Set(data.levelIngredients[level].materials);
+        ingredientPopup.Set(data.levelIngredients[GetLevel()].materials);
     }
-    public virtual string CreateText() {
+    public virtual string CreateText()
+    {
         string temp = data.desc;
         temp += "\n";
-        temp += "Level " + level + " / " + (data.levelIngredients.Length-1);
+        temp += "Level " + GetLevel() + " / " + (data.levelIngredients.Length - 1);
         temp += "\n";
         temp += data.effectDesc;
         return temp;
     }
 
-    public void Toggle() {
+    public void Toggle()
+    {
         panel.SetActive(!panel.activeSelf);
-        if (panel.activeSelf) {
+        if (panel.activeSelf)
+        {
             UpdateUI();
         }
     }
-    public virtual void Upgrade() 
+    public virtual void Upgrade()
     {
-        if (level >= data.levelIngredients.Length - 1) return;
-        if (GameManager.instance.storage.UseMaterials(data.levelIngredients[level].materials)) {
-            interiorSystem.placedFurnitureList.Find(x => x.id == data.id).level++;
-            level = interiorSystem.FindFurnitureLv(data.id);
-        }
-        GameManager.instance.SetPlayerSpec();
-
-        UpdateUI();
+        interiorSystem.UpgradeFurniture(data.id);
+    }
+    public int GetLevel()
+    {
+        return interiorSystem.FindFurnitureLv(data.id);
     }
 }

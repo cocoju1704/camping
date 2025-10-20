@@ -4,27 +4,46 @@ using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Events;
 public class DataManager : Singleton<DataManager>
-{ // 게임 실행 시 데이터 로드 
-    [Header("#Prefab")]
+{
+    [Header("# Prefabs")]
+    [Tooltip("게임 내에서 배치될 가구 프리팹 (기본 가구 생성에 사용)")]
     public GameObject furniturePrefab;
-    [Header("#Scriptable Data")]
-    public CarPartsData[] carPartsDataList;
-    public FurnitureData[] furnitureDataList;
-    public Dictionary<int, MaterialData> materialDataDict;
-    public Dictionary<int, WeaponData> weaponDataDict;
-    public LootData[] lootDataList;
-    public EnemyData[] enemyDataList;
-    public EnemyData[] bossDataList;
-    public StageData[] stageDataList;
 
-    protected override void Awake() {
+    [Header("# Scriptable Data")]
+    [Tooltip("캠핑카 부품 데이터 (업그레이드/교체용)")]
+    public CarPartsData[] carPartsDataList;
+
+    [Tooltip("가구 데이터 (설치, 배치, 상호작용에 사용)")]
+    public FurnitureData[] furnitureDataList;
+
+    [Tooltip("재료 데이터 (id 기반 접근을 위해 Dictionary로 관리)")]
+    public Dictionary<int, MaterialData> materialDataDict;
+
+    [Tooltip("무기 데이터 (id 기반 접근을 위해 Dictionary로 관리)")]
+    public Dictionary<int, WeaponData> weaponDataDict;
+
+    [Tooltip("드랍 아이템 데이터 (전리품/재료 드랍 정보)")]
+    public LootData[] lootDataList;
+
+    [Tooltip("일반 적 데이터")]
+    public EnemyData[] enemyDataList;
+
+    [Tooltip("보스 적 데이터")]
+    public EnemyData[] bossDataList;
+
+    [Tooltip("스테이지 데이터 (맵, 웨이브 정보 등)")]
+    public StageData[] stageDataList;
+    protected override void Awake()
+    {
         LoadAllData();
         Init();
     }
-    void Init() {
+    void Init()
+    {
     }
     // 데이터 로딩 관련
-    void LoadAllData() {
+    void LoadAllData()
+    {
         // List 형태로 저장
         furnitureDataList = Resources.LoadAll<FurnitureData>("Data/Furnitures");
         carPartsDataList = Resources.LoadAll<CarPartsData>("Data/CarParts");
@@ -34,83 +53,23 @@ public class DataManager : Singleton<DataManager>
         stageDataList = Resources.LoadAll<StageData>("Data/Stages");
         materialDataDict = new Dictionary<int, MaterialData>();
         weaponDataDict = new Dictionary<int, WeaponData>();
-        //amterial, weapon 데이터는 인덱스 기반으로 불러올 수 있도록 딕셔너리로 변환
-        foreach (MaterialData materialData in Resources.LoadAll<MaterialData>("Data/Materials")) {
+        //material, weapon 데이터는 인덱스 기반으로 불러올 수 있도록 딕셔너리로 변환
+        foreach (MaterialData materialData in Resources.LoadAll<MaterialData>("Data/Materials"))
+        {
             materialDataDict.Add(materialData.id, materialData);
         }
-        foreach (WeaponData weaponData in Resources.LoadAll<WeaponData>("Data/Weapons")) {
+        foreach (WeaponData weaponData in Resources.LoadAll<WeaponData>("Data/Weapons"))
+        {
             weaponDataDict.Add(weaponData.id, weaponData);
         }
     }
+    // 새 게임 시작 시 초기화
 }
 
 
 
 
 
-[Serializable]
-public class CarSpec {
-    public float carHealth; // 범퍼: 캠핑카 체력
-    public float callTime; // 엔진: 캠핑카 도착까지 걸리는 시간
-    public float boardTime; // 바퀴: 캠핑카 탑승까지 걸리는 시간
-    public int maxBattery; // 배터리: 캠핑카 최대 배터리
-    public int maxStorage;
-    public CarSpec(float health, float callTime, float boardTime, int maxBattery, int maxStorage) {
-        this.carHealth = health;
-        this.callTime = callTime;
-        this.boardTime = boardTime;
-        this.maxBattery = maxBattery;
-        this.maxStorage = maxStorage;
-    }
-}
-[Serializable]
-public class PlayerSpec { //플레이어 기본 정보 묶음
-    public float health;
-    public int maxHealth;
-    public float speed;
-    public PlayerSpec() {
-        health = 100;
-        maxHealth = 100;
-        speed = 5;
-    }
-    public PlayerSpec(float health, int maxHealth, float speed) {
-        this.health = health;
-        this.maxHealth = maxHealth;
-        this.speed = speed;
-    }
-}
 
-[Serializable]
-public class GameData { // 저장해야될 데이터 묶음
-    public PlayerSpec playerSpec;
-    public int stageNo;
-    public List<FurnitureIdLvPos> furnitureIdLvPos;
-    public Dictionary<int, int> storage;
-    public List<int> vehicleLevels;
-    public GameData() : this(new PlayerSpec(), 0, new Dictionary<Vector2Int, FurnitureData>()) { }
-    public GameData(PlayerSpec playerData, int stageNo, Dictionary<Vector2Int, FurnitureData> furnitureData) {
-        this.playerSpec = playerData;
-        this.stageNo = stageNo;
-        this.furnitureIdLvPos = new List<FurnitureIdLvPos>();
-    }
-    public List<KeyValuePair<int, int>> obtainedWeaponLvs = new List<KeyValuePair<int, int>>();
-    public Vector2Int playerSelectedWeapon;
-    public List<int> stageNoList = new List<int>();
-    public int stageNoIdx;
-}
 
-[Serializable]
-public class LevelUpMaterials {
-    public List<Vector2Int> materials;
-}
-[Serializable]
-public class FurnitureIdLvPos { //배치된 가구의 위치와 레벨 묶음
-    public int id;
-    public int level;
-    public Vector2Int pos;
-    public FurnitureIdLvPos(int id, int level, Vector2Int pos) {
-        this.id = id;
-        this.level = level;
-        this.pos = pos;
-    }
-}
+

@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91af6a73939dda6459c9a08b909b4a13, type: 3}
   m_Name: StageData
   m_EditorClassIdentifier: 
-  stageExp: 10
-  earlySpawnTime: 5
+  key: 
+  stageMaxTime: 120
+  earlySpawnTime: 10
   lateSpawnTime: 1
   enemyDataList:
   - {fileID: 11400000, guid: 957d55cec2582fb4cabbd54667711c2f, type: 2}
@@ -26,3 +27,5 @@ MonoBehaviour:
   lootDataList:
   - {fileID: 11400000, guid: d87bee17f7e7c6f459d8b621057ded7f, type: 2}
   - {fileID: 11400000, guid: 42ca6c442d9cf944883cd98c4948e548, type: 2}
+  blockPrefabList:
+  - {fileID: 6581454885313861925, guid: 7443dabe0f4dd3245860621fcbf77714, type: 3}

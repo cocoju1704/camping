@@ -46,30 +46,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 629b1c709f89ec04b8323c77b8f5252c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  poolManager: {fileID: 0}
   playerPrefab: {fileID: 2283390520891427384, guid: 11b675632c20ffa4490ce5659d534a48, type: 3}
-  poolManagerPrefab: {fileID: 2402958709451229470, guid: cd6cff0d99946a645acf9ea84890a848, type: 3}
-  inventory: {fileID: 0}
+  player: {fileID: 0}
+  carSpec:
+    carHealth: 0
+    callTime: 0
+    boardTime: 0
+    maxBattery: 0
+    maxStorage: 0
   storage: {fileID: 0}
-  vCam: {fileID: 0}
-  tempTime: 0
-  gameTime: 0
-  maxGameTime: 20
-  timerActive: 0
-  exp: 0
-  ArrivalTime: 20
-  stageExp: 10
-  kills: 0
-  onStageStart:
-    m_PersistentCalls:
-      m_Calls: []
-  onExpFull:
-    m_PersistentCalls:
-      m_Calls: []
-  onStageWrapUp:
-    m_PersistentCalls:
-      m_Calls: []
+  vehicleLevels: 00000000000000000000000000000000
+  furnitureIdLvPos: []
+  stageNoList: 00000000000000000000000000000000
+  stageNoIdx: 0
 --- !u!114 &5848956291895569634
 MonoBehaviour:
   m_ObjectHideFlags: 0

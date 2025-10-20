@@ -535,9 +535,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0db47b4d915fc24187d1a00254f3bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  maxHealth: 0
-  speed: 3
+  health: 10
+  maxHealth: 10
+  speed: 5
   _reloadMultiplier: 0
   bonusHealth: 0
   meleeBonusDmg: 0

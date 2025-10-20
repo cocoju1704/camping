@@ -12,7 +12,8 @@ public class GameBooting {
             GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GameBooting/DataManager")),
             GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GameBooting/GameManager")),
             GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GameBooting/PoolManager")),
-            //GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GameBooting/PoolManager")),
+            GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GameBooting/SceneFlowManager")),
+            GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GameBooting/InputSystem")),
         };
 
         foreach(GameObject obj in objs) {

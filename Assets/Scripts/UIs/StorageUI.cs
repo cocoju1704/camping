@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class StorageUI : MonoBehaviour // 캠핑카 인벤토리 UI 관련 클래스
+public class StorageUI : MonoBehaviour // 캠핑카, 인벤토리 UI 관련 클래스
 {
     public enum InfoType {
         inventory,
@@ -34,17 +34,14 @@ public class StorageUI : MonoBehaviour // 캠핑카 인벤토리 UI 관련 클�
         int i = 0;
         switch (type) {
             case InfoType.inventory:
-            Debug.Log(StageManager.instance.inventory.itemList.Count + " : " + slots.Length);
                 foreach (KeyValuePair<int, int> item in StageManager.instance.inventory.itemList) {
                     slots[i].SetItem(item.Key, item.Value);
-                    Debug.Log(i);
                     i++;
                 }
                 break;
             case InfoType.storage:
                 // maxStorage까지만 슬롯 비활성화
                 int maxStorage = GameManager.instance.carSpec.maxStorage;
-                Debug.Log(maxStorage);
                 for (int j = 0; j < slots.Length; j++) {
                     if (j < maxStorage) {
                         slots[j].gameObject.SetActive(true);
@@ -52,14 +49,15 @@ public class StorageUI : MonoBehaviour // 캠핑카 인벤토리 UI 관련 클�
                         slots[j].gameObject.SetActive(false);
                     }
                 }
-                foreach (KeyValuePair<int, int> item in GameManager.instance.storage.itemList) {
+                foreach (KeyValuePair<int, int> item in GameManager.instance.storage.itemList)
+                {
                     slots[i].SetItem(item.Key, item.Value);
                     i++;
                 }
                 break;
         }
     }
-    void Toggle() {
+    public void Toggle() {
         isShown = !isShown;
         panel.SetActive(isShown);
     }

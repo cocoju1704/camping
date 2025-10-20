@@ -22,7 +22,6 @@ MonoBehaviour:
   exp: 4
   materialType: 3
   dropRate: 30
+  enemyPrefab: {fileID: 5041579732397875258, guid: 9bcbd0e269a04ed4191e3647c9d5b897, type: 3}
   spriteType: 3
-  enemyActionData:
-  - {fileID: 11400000, guid: 907b8a915b1adb34f893146fe7640b0b, type: 2}
-  - {fileID: 11400000, guid: f30ceb8881bece746a53ca5b28186261, type: 2}
+  enemyActionDataList: []

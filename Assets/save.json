@@ -1,9 +1,4 @@
 {
-  "playerSpec": {
-    "health": 100.0,
-    "maxHealth": 100,
-    "speed": 5.0
-  },
   "stageNo": 0,
   "furnitureIdLvPos": [],
   "storage": {},
@@ -49,6 +44,11 @@
     "magnitude": 302.001648,
     "sqrMagnitude": 91205
   },
-  "stageNoList": [],
+  "stageNoList": [
+    0,
+    0,
+    0,
+    0
+  ],
   "stageNoIdx": 0
 }

@@ -346,6 +346,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthSlider
       objectReference: {fileID: 0}
+    - target: {fileID: 7087954855295753551, guid: 3135408b5db61a846bfeed666159be3b, type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7416741058444142850, guid: 3135408b5db61a846bfeed666159be3b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

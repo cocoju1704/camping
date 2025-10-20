@@ -2,13 +2,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnemyActionData", menuName = "ScriptableObjects/EnemyActionData")]
 
 public class EnemyActionData : ScriptableObject {
-    public enum AttackType {
-        Melee_Charge,
+    public enum AttackType
+    {
+        Melee_Charge_Short,
         Ranged_Normal,
         Ranged_Spread,
         Ranged_Tracking,
         Ranged_Circle,
         Ranged_Explosive,
+        Melee_Charge_Long,
     }
     [Header("# Projectile")]
     public AttackType attackType;

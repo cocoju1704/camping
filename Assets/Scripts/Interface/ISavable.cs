@@ -1,4 +1,5 @@
 public interface ISavable {
-    void Save(GameData gameData);
-    void Load(GameData gameData);
+    string SaveKey { get; }   // 예: "Interior"
+    void Save(GameData data);
+    void Load(GameData data);
 }

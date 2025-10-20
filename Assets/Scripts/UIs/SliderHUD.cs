@@ -15,6 +15,7 @@ public class SliderHUD : MonoBehaviour // HUD에 표시되는 슬라이더
         Reload,
         CarHealth,
         Stamina,
+        StageTime,
     }
 
     public InfoType type;
@@ -23,11 +24,33 @@ public class SliderHUD : MonoBehaviour // HUD에 표시되는 슬라이더
     public Image mySliderFill;
     public float time = 0f;
 
+    // Lazy binding용 캐시
+    private GameManager gm;
+    private Player player;
+    private WeaponSystem ws;
+    private StageManager stage;
+    private Van van;
+
     void Awake()
     {
         myText = GetComponent<TMP_Text>() ?? GetComponentInChildren<TMP_Text>();
         mySlider = GetComponent<Slider>();
         mySliderFill = mySlider.fillRect.GetComponent<Image>();
+    }
+
+    // 필요할 때만 참조 바인딩
+    private bool TryBind()
+    {
+        gm ??= GameManager.instance;
+        if (gm == null) return false;
+
+        player ??= gm.player;
+        stage ??= StageManager.instance;
+        van ??= FindObjectOfType<Van>();
+        if (player != null && ws == null)
+            ws = player.GetComponent<WeaponSystem>();
+
+        return true;
     }
 
     public void ChangeTypeTo(InfoType newType)
@@ -38,92 +61,119 @@ public class SliderHUD : MonoBehaviour // HUD에 표시되는 슬라이더
 
     void LateUpdate()
     {
+        if (!TryBind()) return; // 아직 GameManager나 Player가 준비되지 않은 경우 스킵
+
         time += Time.deltaTime;
+
         switch (type)
         {
             case InfoType.Exp:
-                UpdateExp();
+                if (stage != null) UpdateExp();
                 break;
             case InfoType.Health:
-                if (GameManager.instance.player == null) return;
-                UpdateHealth(GameManager.instance.player.health, GameManager.instance.player.maxHealth);
+                if (player != null) UpdatePlayerHealth();
                 break;
             case InfoType.EnemyHealth:
-                if (GetComponentInParent<Enemy>() == null) return;
-                UpdateHealth(GetComponentInParent<Enemy>().health, GetComponentInParent<Enemy>().maxHealth);
+                var enemy = GetComponentInParent<Enemy>();
+                if (enemy != null) UpdateHealth(enemy.health, enemy.maxHealth);
                 break;
             case InfoType.LootHealth:
-                if (GetComponentInParent<Loot>() == null) return;
-                UpdateHealth(GetComponentInParent<Loot>().health, GetComponentInParent<Loot>().maxHealth);
+                var loot = GetComponentInParent<Loot>();
+                if (loot != null) UpdateHealth(loot.health, loot.maxHealth);
                 break;
             case InfoType.Mag:
-                UpdateMag();
+                if (ws != null) UpdateMag();
                 break;
             case InfoType.Reload:
-                UpdateReload();
+                if (ws != null) UpdateReload();
                 break;
             case InfoType.CarHealth:
-                if (GameManager.instance.carSpec == null) return;
-                UpdateCarHealth();
+                if (van != null) UpdateCarHealth();
                 break;
             case InfoType.Stamina:
-                UpdateStamina();
+                if (player != null) UpdateStamina();
+                break;
+            case InfoType.StageTime:
+                if (stage != null) UpdateTime();
                 break;
         }
     }
 
     void UpdateExp()
     {
-        float curExp = StageManager.instance.exp;
-        float maxExp = StageManager.instance.stageExp;
-        Debug.Log("curExp: " + curExp + ", maxExp: " + maxExp);
-        mySlider.value = curExp / maxExp;
+        float curExp = stage.currentExp;
+        float maxExp = stage.maxExp;
+        mySlider.value = maxExp > 0 ? curExp / maxExp : 0f;
     }
+
     void UpdateHealth(float curHealth, float maxHealth)
     {
         if (curHealth < 0) curHealth = 0;
-        myText.text = "" + curHealth;
-        mySlider.value = curHealth / maxHealth;
+        myText.text = ((int)curHealth).ToString();
+        mySlider.value = maxHealth > 0 ? curHealth / maxHealth : 0f;
+    }
+
+    void UpdatePlayerHealth()
+    {
+        float curHealth = player.health;
+        float maxHealth = player.maxHealth;
+        myText.text = ((int)curHealth).ToString();
+        mySlider.value = maxHealth > 0 ? curHealth / maxHealth : 0f;
     }
 
     void UpdateMag()
     {
-        Weapon weapon = Player.instance.GetComponentInParent<WeaponSystem>().currentWeapon;
+        if (ws.currentWeapon == null) return;
+        var weapon = ws.currentWeapon;
+
         if (weapon.isMelee)
         {
-            mySlider.value = 1;
+            mySlider.value = 1f;
             myText.text = "";
         }
         else
         {
-            myText.text = weapon.mag + " / " + weapon.maxMag;
-            mySlider.value = (float)weapon.mag / weapon.maxMag;
+            myText.text = $"{weapon.mag} / {weapon.maxMag}";
+            mySlider.value = weapon.maxMag > 0 ? (float)weapon.mag / weapon.maxMag : 0f;
             if (weapon.isReloading)
-            {
                 ChangeTypeTo(InfoType.Reload);
-            }
         }
     }
 
     void UpdateReload()
     {
-        Weapon weapon = Player.instance.GetComponentInParent<WeaponSystem>().currentWeapon;
-        mySlider.value = time / weapon.reloadTime;
+        if (ws.currentWeapon == null) return;
+        var weapon = ws.currentWeapon;
+
+        mySlider.value = weapon.reloadTime > 0 ? time / weapon.reloadTime : 0f;
         myText.text = weapon.isMelee ? "" : "RELOADING";
-        if (!weapon.isReloading) {
+        if (!weapon.isReloading)
             ChangeTypeTo(InfoType.Mag);
-        }
     }
-    void UpdateCarHealth() {
-        float curHealth = FindObjectOfType<Van>().health;
-        float maxHealth = FindObjectOfType<Van>().maxHealth;
-        myText.text = "" + curHealth;
-        mySlider.value = curHealth / maxHealth;
+
+    void UpdateCarHealth()
+    {
+        if (van == null) return;
+        float curHealth = van.health;
+        float maxHealth = van.maxHealth;
+        myText.text = ((int)curHealth).ToString();
+        mySlider.value = maxHealth > 0 ? curHealth / maxHealth : 0f;
     }
-    void UpdateStamina() {
-        float curStamina = Player.instance.stamina;
-        float maxStamina = Player.instance.maxStamina;
-        myText.text = (int)curStamina + " / " + maxStamina;
-        mySlider.value = curStamina / maxStamina;
+
+    void UpdateStamina()
+    {
+        float curStamina = player.stamina;
+        float maxStamina = player.maxStamina;
+        myText.text = $"{(int)curStamina} / {maxStamina}";
+        mySlider.value = maxStamina > 0 ? curStamina / maxStamina : 0f;
+    }
+
+    void UpdateTime()
+    {
+        float remainTime = Mathf.Max(stage.stageMaxTime - stage.currentTime, 0f);
+        mySlider.value = stage.stageMaxTime > 0 ? remainTime / stage.stageMaxTime : 0f;
+        int min = Mathf.FloorToInt(remainTime / 60);
+        int sec = Mathf.FloorToInt(remainTime % 60);
+        myText.text = $"{min:00}:{sec:00}";
     }
 }

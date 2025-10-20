@@ -15,12 +15,13 @@ MonoBehaviour:
   id: 4
   name: 
   spawnTime: 3
+  isBoss: 0
   health: 30
   damage: 10
   speed: 0
   exp: 10
   materialType: 0
   dropRate: 0
+  enemyPrefab: {fileID: 8087293546549720491, guid: 3be91bf72f8e8f941a5c68df0ebf46ee, type: 3}
   spriteType: 4
-  enemyActionData:
-  - {fileID: 11400000, guid: df3a0cdc3966b8644aa63c72d794b298, type: 2}
+  enemyActionDataList: []

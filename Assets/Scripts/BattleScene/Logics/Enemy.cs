@@ -7,14 +7,15 @@ using UnityEngine.Events;
 using UnityEngine.InputSystem;
 public class Enemy : Unit // 몬스터의 기본 정보
 {
+    [Header("Monster Params")]
     public float speed;
     public int exp;
     public int damage;
     public int materialID;
     public int dropRate;
+    public bool isBoss = false;
 
     public EnemyData enemyData;
-    public RuntimeAnimatorController[] animControllers; // 몬스터의 애니메이션 컨트롤러
     Rigidbody2D target; // 몬스터가 향하는 대상
     public bool isLive = true; //몬스터 사망여부
     Animator anim;
@@ -25,7 +26,7 @@ public class Enemy : Unit // 몬스터의 기본 정보
 
     void Awake() {
         rigid = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponent<Animator>();
         waitForFixedUpdate = new WaitForFixedUpdate();
         coll = GetComponent<Collider2D>();
@@ -36,7 +37,6 @@ public class Enemy : Unit // 몬스터의 기본 정보
 
     public void Init(EnemyData data) { // 몬스터 프리팹이 어떤 종류의 몬스터일지 결정
         enemyData = data;
-        anim.runtimeAnimatorController = animControllers[data.spriteType];
         speed = data.speed;
         maxHealth = data.health;
         health = data.health;
@@ -75,17 +75,20 @@ public class Enemy : Unit // 몬스터의 기본 정보
             coll.enabled = false;
             spriteRenderer.sortingOrder = 1;
             anim.SetBool("Dead", true);
-            StageManager.instance.kills++;
+            StageManager.instance.currentKills++;
             StageManager.instance.GetExp(exp);
-            if (enemyData.isBoss) StageManager.instance.onBossClear.Invoke();
             GetComponent<EnemyAction>().enabled = false;
             StartCoroutine(DropLoot());
         }
     }
 
-    void Dead() { //몬스터 사망 처리(비활성화)
+    void AfterDeathCleanup()
+    { //몬스터 사망 처리(비활성화)
         rigid.simulated = false;
         gameObject.SetActive(false);
+        if (isBoss) {
+            StageManager.instance.onStageClear.Invoke();
+        }
     }
 
     IEnumerator KnockBack(float knockBackForce) { // 투사체 넉백 변수를 인자로 받아 그만큼 넉백
@@ -106,6 +109,6 @@ public class Enemy : Unit // 몬스터의 기본 정보
         material.Init(materialID, transform.position);
         yield return material.transform.DOMove(destination, 1f).SetEase(Ease.OutQuad).WaitForCompletion();
         yield return new WaitForSeconds(1f);
-        Dead();
+        AfterDeathCleanup();
     }
 }

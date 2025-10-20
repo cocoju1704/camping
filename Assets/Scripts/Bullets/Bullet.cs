@@ -6,17 +6,25 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour // 투사체 기본 컴포넌트
 {
+    
     public enum BulletType {
         Player,
         Enemy,
     }
+    [Header("투사체 속성")]
+    [Tooltip("생성 주체")]
     public BulletType bulletType;
+    [Tooltip("대미지")]
     public float damage; // 대미지
+    [Tooltip("관통. 0이면 무제한")]
     public int pierceCount; // 관통
+    [Tooltip("근접 투사체")]
     public bool isMelee;
+    [Tooltip("넉백값")]
     public float knockback;
+    [Tooltip("투사체 속도")]
     public float speed;
-    public Rigidbody2D rigid;
+    Rigidbody2D rigid;
     void Awake() {
         rigid = GetComponent<Rigidbody2D>();
     }
