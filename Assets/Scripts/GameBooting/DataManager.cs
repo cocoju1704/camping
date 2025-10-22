@@ -17,7 +17,7 @@ public class DataManager : Singleton<DataManager>
     public FurnitureData[] furnitureDataList;
 
     [Tooltip("재료 데이터 (id 기반 접근을 위해 Dictionary로 관리)")]
-    public Dictionary<int, MaterialData> materialDataDict;
+    public Dictionary<int, IngredientData> materialDataDict;
 
     [Tooltip("무기 데이터 (id 기반 접근을 위해 Dictionary로 관리)")]
     public Dictionary<int, WeaponData> weaponDataDict;
@@ -51,10 +51,10 @@ public class DataManager : Singleton<DataManager>
         enemyDataList = Resources.LoadAll<EnemyData>("Data/Enemies");
         bossDataList = Resources.LoadAll<EnemyData>("Data/Bosses");
         stageDataList = Resources.LoadAll<StageData>("Data/Stages");
-        materialDataDict = new Dictionary<int, MaterialData>();
+        materialDataDict = new Dictionary<int, IngredientData>();
         weaponDataDict = new Dictionary<int, WeaponData>();
         //material, weapon 데이터는 인덱스 기반으로 불러올 수 있도록 딕셔너리로 변환
-        foreach (MaterialData materialData in Resources.LoadAll<MaterialData>("Data/Materials"))
+        foreach (IngredientData materialData in Resources.LoadAll<IngredientData>("Data/Materials"))
         {
             materialDataDict.Add(materialData.id, materialData);
         }

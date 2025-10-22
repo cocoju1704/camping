@@ -35,7 +35,7 @@ public class Loot : Unit // 파괴 시 재료를 드랍하는 오브젝트
         if (health <= 0) {
             for (int i = 0; i < data.materialPair.Count; i++) {
                 for (int j = 0; j < data.materialPair[i].y; j++) {
-                    Material material = PoolManager.instance.Get("Material").GetComponent<Material>();
+                    Ingredient material = PoolManager.instance.Get("Material").GetComponent<Ingredient>();
                     material.transform.position = transform.position;
                     Vector3 destination = material.transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
                     material.Init(data.materialPair[i].x, transform.position);

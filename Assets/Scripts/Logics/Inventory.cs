@@ -15,11 +15,11 @@ public class Inventory : MonoBehaviour
         InitForDebug();
     }
 
-    public void Obtain(Material material) { // 재료가 충돌 시 호출
-        if (itemList.ContainsKey(material.materialId)) {
-            itemList[material.materialId] += 1;
+    public void Obtain(Ingredient material) { // 재료가 충돌 시 호출
+        if (itemList.ContainsKey(material.ingredientId)) {
+            itemList[material.ingredientId] += 1;
         } else {
-            itemList.Add(material.materialId, 1); 
+            itemList.Add(material.ingredientId, 1); 
         }
         onInventoryChange.Invoke();
     }

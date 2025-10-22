@@ -103,7 +103,7 @@ public class Enemy : Unit // 몬스터의 기본 정보
         bool isDrop = Random.Range(0, 100) < dropRate;
         if (!isDrop) yield break;
 
-        Material material = PoolManager.instance.Get("Material").GetComponent<Material>();
+        Ingredient material = PoolManager.instance.Get("Material").GetComponent<Ingredient>();
         material.transform.position = transform.position;
         Vector3 destination = material.transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
         material.Init(materialID, transform.position);

@@ -67,7 +67,20 @@ public class StageManager : Singleton<StageManager> { // 전투 스테이지 데
         timerActive = true;
         Player.instance.ActivateWeapon();
     }
-    void SetUpPoolsForStage() {}
+    void SetUpPoolsForStage()
+    {
+        // enemyPrefab 및 enemy 총알 풀에 등록
+        foreach (EnemyData enemyData in stageData.enemyDataList)
+        {
+            NewPoolManager.instance.Register(enemyData.name, enemyData.enemyPrefab, 20, null);
+            foreach (EnemyActionData enemyActionData in enemyData.enemyActionDataList)
+            {
+                NewPoolManager.instance.Register(enemyActionData.projectile.name, enemyActionData.projectile, 100, null);
+            }
+        }
+
+        // bullet
+    }
     // 탈출 누르면 스테이지 모든 param 고정
     void WrapupStage() {
         timerActive = false;
@@ -87,8 +100,9 @@ public class StageManager : Singleton<StageManager> { // 전투 스테이지 데
     {
         onGameOver.Invoke();
     }
-    public void CreateStage(StageData data)
+    public void CreateStage()
     {
-        
+        currentTime = 0f;
+        timerActive = true;
     }
 }

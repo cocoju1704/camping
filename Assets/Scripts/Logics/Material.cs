@@ -4,13 +4,13 @@ using Microsoft.Unity.VisualStudio.Editor;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Material : MonoBehaviour
+public class Ingredient : MonoBehaviour
 {
     [Header("#Basic Info")]
-    public int materialId;
-    public string materialName;
-    public string materialDesc;
-    public int materialTier;
+    public int ingredientId;
+    public string ingredientName;
+    public string ingredientDesc;
+    public int ingredientTier;
     
     [Header("#Visual Info")]
     SpriteRenderer spriteRenderer;
@@ -25,11 +25,11 @@ public class Material : MonoBehaviour
         StartCoroutine(DisableColliderForOneSecond());
     }
     public void Init(int id, Vector3 pos) {
-        MaterialData data = DataManager.instance.materialDataDict[id];
-        materialId = data.id;
-        materialName = data.itemName;
-        materialDesc = data.desc;
-        materialTier = data.tier;
+        IngredientData data = DataManager.instance.materialDataDict[id];
+        ingredientId = data.id;
+        ingredientName = data.itemName;
+        ingredientDesc = data.desc;
+        ingredientTier = data.tier;
         spriteRenderer.sprite = data.icon;
         transform.position = pos;
     }
